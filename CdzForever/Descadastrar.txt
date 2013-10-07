@@ -1,0 +1,17 @@
+on *:chat:.Descadastrar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está 2Cadastrado ) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,senha) != $2 ) {
+  /msg =$nick 2(4 Senha inválida 2) | halt }
+    /set %armadura $readini(cadastros\ $+ $nick $+ .ini,$nick,armadura)
+    if ( %armadura != nenhuma ) {
+    /writeini armaduras.ini %armadura dono Disponível
+    }
+    /remove cadastros\ $+ $nick $+ .ini
+    /remove golpes\ $+ $nick $+ .ini $nick
+    /remove autoluta\ $+ $nick $+ .ini $nick
+    /remove banco\ $+ $nick $+ .ini $nick
+    /remini top.ini $nick
+    /remini cadastros.ini $nick
+    /msg =$nick 2(14 Cadastro 2Apagado14 com sucesso2! )
+}

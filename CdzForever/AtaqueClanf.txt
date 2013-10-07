@@ -1,0 +1,234 @@
+;;Editei esse aki
+on *:chat:.Atacar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+    /msg =$nick Você não está Cadastrado 
+    halt 
+  }  
+  if !$2 { /msg =$nick Coloque seu Ataque 
+    halt 
+  } 
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Sim ) {
+    /msg =$nick ERRO: Você está lutando 
+    halt 
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+    /msg =$nick ERRO: Você está sendo desafiado 
+    halt 
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiando ) {
+    /msg =$nick ERRO: Você está desafiando alguem 
+    halt 
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+    /msg =$nick ERRO: Você está treinando 
+    halt
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: Você está trabalhando 
+    halt
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+    /msg =$nick ERRO: Você está se recuperando 
+    halt 
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) <= 0 ) {
+    /msg =$nick ERRO: Você não tem Hp suficiente 
+    halt 
+  }
+  if ( $readini(listando.ini,$nick,listando) == listando ) {
+    /msg =$nick ERRO: Você está listando, Digite: .Deslistar 
+    halt 
+  }
+  if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Clanf ) {
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,vez) == vez ) {
+      /msg =$nick ERRO: Não está no seu Turno 
+      halt 
+    } 
+    if ($readini golpes\ $+ $nick $+ .ini $nick $2 == $null ) {
+      /msg =$nick ERRO: Você não possui o golpe: $2 
+      halt 
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,mp) <  $readini(golpes.ini,golpes,$2) ) {
+      /msg =$nick ERRO: Você não tem Mp suficiente 
+      halt 
+    }
+    /set %n1 $readini(clanf.ini,luta,nick1)
+    /set %n2 $readini(clanf.ini,luta,nick2)
+    /set %n3 $readini(clanf.ini,luta,nick3)
+    /set %n4 $readini(clanf.ini,luta,nick4)
+    /set %oponente $readini(autoluta\ $+ $nick $+ .ini,$nick,oponente)
+    /set %falhou $rand(1,8)
+  }
+  ;;Coloquei esse aki
+  if (%falhou = 1) {  
+    /msg = $+ %n1 $nick falhou o Golpe
+    /msg = $+ %n2 $nick falhou o Golpe
+    /msg = $+ %n3 $nick falhou o Golpe
+    /msg = $+ %n4 $nick falhou o Golpe
+    /msg = $+ %n1 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+    /msg = $+ %n2 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+    /msg = $+ %n3 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+    /msg = $+ %n4 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+    /msg = $+ %n1 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n2 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n3 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n4 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /writeini autoluta\ $+ $nick $+ .ini $nick vez 
+  }
+  ;;Coloquei esse aki
+  if ( $nick == %n1 ) { 
+    /msg = $+ %n1 Aguarde, Turno de %n4
+    /msg = $+ %n2 Aguarde, Turno de %n4
+    /msg = $+ %n3 Aguarde, Turno de %n4
+    /msg = $+ %n4 %n4 Digite: .Atacar <Ataque> 
+    /writeini autoluta\ $+ %n4 $+ .ini %n4 oponente %n2
+    /remini autoluta\ $+ %n4 $+ .ini %n4 vez 
+    halt 
+  }
+  if ( $nick == %n2 ) { 
+    /msg = $+ %n1 Aguarde, Turno de %n3
+    /msg = $+ %n2 Aguarde, Turno de %n3
+    /msg = $+ %n4 Aguarde, Turno de %n3
+    /msg = $+ %n3 %n3 Digite: .Atacar <Ataque> 
+    /writeini autoluta\ $+ %n3 $+ .ini %n3 oponente %n1
+    /remini autoluta\ $+ %n3 $+ .ini %n3 vez 
+    halt
+  }
+  if ( $nick == %n3 ) { 
+    /msg = $+ %n2 Aguarde, Turno de %n1
+    /msg = $+ %n3 Aguarde, Turno de %n
+    /msg = $+ %n4 Aguarde, Turno de %n4
+    /msg = $+ %n1 %n1 Digite: .Atacar <Ataque> 
+    /writeini autoluta\ $+ %n1 $+ .ini %n1 oponente %n4
+    /remini autoluta\ $+ %n1 $+ .ini %n1 vez 
+    halt
+  }
+  if ( $nick == %n4 ) { 
+    /msg = $+ %n1 Aguarde, Turno de %n2
+    /msg = $+ %n3 Aguarde, Turno de %n2
+    /msg = $+ %n4 Aguarde, Turno de %n2
+    /msg = $+ %n2 %n2 Digite: .Atacar <Ataque> 
+    /writeini autoluta\ $+ %n2 $+ .ini %n2 oponente %n3
+    /remini autoluta\ $+ %n2 $+ .ini %n2 vez 
+    halt
+  }
+  /set %ataque $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,ataque) + $readini(golpes\ $+ $nick $+ .ini,$nick,$2) )
+  /set %defesa $calc( $readini(cadastros\ $+ %oponente $+ .ini,%oponente,defesa) + $readini(cadastros\ $+ %oponente $+ .ini,%oponente,nivel))
+  /set %rand1 $calc( %ataque - %defesa ) 
+  /set %rand $rand( %ataque,%rand1 )
+  if ( %ataque < %defesa ) { 
+    /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $calc( $readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp) - 1 ) 
+  }
+  if ( %rand > 1 ) { 
+    /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $calc($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp) - %rand ) 
+  }
+  /msg = $+ %n1 $nick Atacou com: $2
+  /msg = $+ %n2 $nick Atacou com: $2
+  /msg = $+ %n3 $nick Atacou com: $2
+  /msg = $+ %n4 $nick Atacou com: $2
+  if ( %ataque < %defesa  ) { 
+    /msg = $+ %n1 $nick tirou 1 Do Hp de %oponente
+    /msg = $+ %n2 $nick tirou 1 Do Hp de %oponente
+    /msg = $+ %n3 $nick tirou 1 Do Hp de %oponente
+    /msg = $+ %n4 $nick tirou 1 Do Hp de %oponente 
+  }
+  if ( %rand > 1 ) { 
+    /msg = $+ %n1 $nick tirou %rand do Hp de %oponente 
+    /msg = $+ %n2 $nick tirou %rand do Hp de %oponente 
+    /msg = $+ %n3 $nick tirou %rand do Hp de %oponente  
+  /msg = $+ %n4 $nick tirou %rand do Hp de %oponente }
+  /msg = $+ %n1 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+  /msg = $+ %n2 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+  /msg = $+ %n3 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+  /msg = $+ %n4 $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) Hp: $readini autoluta\ $+ $nick $+ .ini $Nick Hp  /  $readini autoluta\ $+ $nick $+ .ini $nick Hpmax - Mp: $readini autoluta\ $+ $nick $+ .ini $Nick mp  /  $readini autoluta\ $+ $nick $+ .ini $Nick mpmax
+  /set %menor $readini autoluta\ $+ %oponente $+ .ini %oponente hp
+  if ( %menor <= 0 ) {
+    /msg = $+ %n1 %oponente 15 Hp: 0 $+ / $+ $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n2 %oponente 15 Hp: 0 $+ / $+ $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n3 %oponente 15 Hp: 0 $+ / $+ $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n4 %oponente 15 Hp: 0 $+ / $+ $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+    /msg = $+ %n1 $nick Derrotou %oponente
+    /msg = $+ %n2 $nick Derrotou %oponente
+    /msg = $+ %n3 $nick Derrotou %oponente
+    /msg = $+ %n4 $nick Derrotou %oponente
+    /writeini cadastros\ $+ $nick $+ .ini $nick hp $readini Autoluta\ $+ $nick $+ .ini $nick hp
+    /writeini cadastros\ $+ %oponente $+ .ini %perdedor hp 0
+    /remini Autoluta\ $+ %oponente $+ .ini %oponente
+    /writeini Autoluta\ $+ %oponente $+ .ini %oponente lutando nao
+    if ( %n1 == %oponente ) {
+      /remini clanf.ini luta %n1 
+    }
+    if ( %n2 == %oponente ) {
+      /remini clanf.ini luta %n2 
+    }
+    if ( %n3 == %oponente ) {
+      /remini clanf.ini luta %n3 
+    }
+    if ( %n4 == %oponente ) {
+      /remini clanf.ini luta %n4 
+    }
+    /msg = $+ %n1 %oponente Está fora do 2x2
+    /msg = $+ %n2 %oponente Está fora do 2x2
+    /msg = $+ %n3 %oponente Está fora do 2x2
+    /msg = $+ %n4 %oponente Está fora do 2x2
+    halt
+  }
+  /msg = $+ %n1 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+  /msg = $+ %n2 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+  /msg = $+ %n3 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+  /msg = $+ %n4 %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) Hp: $readini autoluta\ $+ %oponente $+ .ini %oponente Hp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax - Mp: $readini autoluta\ $+ %oponente $+ .ini %oponente mp  /  $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 
+  if ($readini(autoluta\ $+ %oponente $+ .ini,%oponente,Hp) > 0 ) {
+    if ( $nick == %n1 ) { 
+      /msg = $+ %n1 Aguarde, Turno de %n4
+      /msg = $+ %n2 Aguarde, Turno de %n4
+      /msg = $+ %n3 Aguarde, Turno de %n4
+      /msg = $+ %n4 %n4 Digite: .Atacar <Ataque>
+      /msg = $+ %n1 0,0______________________________________ 
+      /msg = $+ %n2 0,0______________________________________ 
+      /msg = $+ %n3 0,0______________________________________ 
+      /msg = $+ %n4 0,0______________________________________  
+      /writeini autoluta\ $+ %n4 $+ .ini %n4 oponente %n2
+      /remini autoluta\ $+ %n4 $+ .ini %n4 vez 
+      halt 
+    }
+    if ( $nick == %n2 ) { 
+      /msg = $+ %n1 Aguarde, Turno de %n3
+      /msg = $+ %n2 Aguarde, Turno de %n3
+      /msg = $+ %n4 Aguarde, Turno de %n3
+      /msg = $+ %n3 %n3 Digite: .Atacar <Ataque> 
+      /msg = $+ %n1 0,0______________________________________ 
+      /msg = $+ %n2 0,0______________________________________ 
+      /msg = $+ %n3 0,0______________________________________ 
+      /msg = $+ %n4 0,0______________________________________ 
+      /writeini autoluta\ $+ %n3 $+ .ini %n3 oponente %n1
+      /remini autoluta\ $+ %n3 $+ .ini %n3 vez 
+      halt 
+    }
+    if ( $nick == %n3 ) { 
+      /msg = $+ %n2 Aguarde, Turno de %n1
+      /msg = $+ %n3 Aguarde, Turno de %n
+      /msg = $+ %n4 Aguarde, Turno de %n4
+      /msg = $+ %n1 %n1 Digite: .Atacar <Ataque> 
+      /msg = $+ %n1 0,0______________________________________ 
+      /msg = $+ %n2 0,0______________________________________ 
+      /msg = $+ %n3 0,0______________________________________ 
+      /msg = $+ %n4 0,0______________________________________ 
+      /writeini autoluta\ $+ %n1 $+ .ini %n1 oponente %n4
+      /remini autoluta\ $+ %n1 $+ .ini %n1 vez 
+      halt 
+    }
+    if ( $nick == %n4 ) { 
+      /msg = $+ %n1 Aguarde, Turno de %n2
+      /msg = $+ %n3 Aguarde, Turno de %n2
+      /msg = $+ %n4 Aguarde, Turno de %n2
+      /msg = $+ %n2 %n2 Digite: .Atacar <Ataque> 
+      /msg = $+ %n1 0,0______________________________________ 
+      /msg = $+ %n2 0,0______________________________________ 
+      /msg = $+ %n3 0,0______________________________________ 
+      /msg = $+ %n4 0,0______________________________________ 
+      /writeini autoluta\ $+ %n2 $+ .ini %n2 oponente %n3
+      /remini autoluta\ $+ %n2 $+ .ini %n2 vez 
+      halt 
+    } 
+  }
+}

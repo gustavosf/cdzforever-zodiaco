@@ -1,0 +1,242 @@
+on *:chat:.Loja: {
+  if ($nick !ison #Cdzforever) { //close -c $nick | halt ) }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(14 Lojas Disponíveis2: )
+    /msg =$nick 0,0CdzForever Autolutas
+    /msg =$nick 2( .Armas 7»2 .Escudos 7»2 .Poções 2)
+    /msg =$nick 0,0CdzForever Autolutas
+  }
+}
+
+on *:chat:.Armas: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( 2Armas0,0------------------------2Compra0,0----------------------2Venda 2)
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2( Adaga 0______________________14 1.000 0______________________14 500 2)
+    /msg =$nick 2( Sabre 0______________________14 3.000 0______________________14 1.500 2)
+    /msg =$nick 2( Foice 0______________________14 4.000 0______________________14 2.000 2)
+    /msg =$nick 2( Machado 0____________________14 7.000 0______________________14 3.500 2)
+    /msg =$nick 2( Katana 0_____________________14 7.000 0______________________14 3.500 2)
+    /msg =$nick 2( Arco.e.Flecha 0______________14 10.000 0_____________________14 5.000 2)
+    /msg =$nick 2( Espada.Curta 0_______________14 18.000 0_____________________14 9.000 2)
+    /msg =$nick 2( Espada.Media 0_______________14 30.000 0_____________________14 15.000 2)
+    /msg =$nick 2( Espada.Longa 0_______________14 50.000 0_____________________14 25.000 2)
+    /msg =$nick 2( Espada.Forjada 0_____________14 80.000 0_____________________14 40.000 2)
+    /msg =$nick 2( Espada.Bronze 0______________14 100.000 0____________________14 50.000 2)
+    /msg =$nick 2( Espada.Aço 0_________________14 110.000 0____________________14 55.000 2)
+    /msg =$nick 2( Espada.Prata 0_______________14 120.000 0____________________14 60.000 2)
+    /msg =$nick 2( Espada.Negra 0_______________14 150.000 0____________________14 75.000 2)
+    /msg =$nick 2( Espada.Fantasma 0____________14 180.000 0____________________14 90.000 2)
+    /msg =$nick 2( Espada.Espectral 0___________14 200.000 0____________________14 100.000 2)
+    /msg =$nick 2( Espada.Dourada 0_____________14 300.000 0____________________14 150.000 2)
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2(14 Digite2: .14Comprar Arma 2<14arma2> )
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2(14 Digite2: .14Vender Arma 2<14arma2> )
+    /msg =$nick 0,0CdzForever AutoLutas
+  }
+}
+
+on *:chat:.Comprar arma*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$3 { /msg =$nick 2(14 Coloque o nome da Arma que você deseja 2) | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Trabalhando ) {
+    /msg =$nick 2(4 ERRO:14 Você está trabalhando2,14 nao pode comprar armas 2) | halt }
+    if ( $readini(Lojas.ini,itens,$3) == $null ) {
+    /msg =$nick 2(4 ERRO:14 A arma2 $3 14não existe 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,arma) != nenhuma ) { 
+      /msg =$nick 2(4 ERRO:14 Você já está equipado com a arma2: $readini(cadastros\ $+ $nick $+ .ini,$nick,arma) 2)
+      /msg =$nick 2(14 Para pegar uma nova arma você terá que vender sua arma 2)
+    /msg =$nick 2(14 Digite2: .14Vender arma 2<14arma2> 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) < $readini(lojas.ini,itens,$3) ) {
+      /msg =$nick 2(4 ERRO:14 Você tem2 $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14De dinheiro 2)
+    /msg =$nick 2(2 $3 14Custa2: $readini(lojas.ini,itens,$3) 2) | halt }
+    /writeini cadastros\ $+ $nick $+ .ini $nick Dinheiro $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) - $readini(lojas.ini,itens,$3) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick arma $3
+    if ( $3 == Adaga ) { /writeini golpes\ $+ $nick $+ .ini $nick Adaga 28 }
+    if ( $3 == Sabre ) { /writeini golpes\ $+ $nick $+ .ini $nick Sabre 35 }
+    if ( $3 == Foice ) { /writeini golpes\ $+ $nick $+ .ini $nick Foice 40 }
+    if ( $3 == Machado ) { /writeini golpes\ $+ $nick $+ .ini $nick Machado 50 } 
+    if ( $3 == Katana ) { /writeini golpes\ $+ $nick $+ .ini $nick Katana 70 }
+    if ( $3 == Arco.e.Flecha ) { /writeini golpes\ $+ $nick $+ .ini $nick Arco.e.Flecha 80 }
+    if ( $3 == Espada.Curta ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Curta 90 }
+    if ( $3 == Espada.Media ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Media 100 }
+    if ( $3 == Espada.Longa ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Longa 115 }
+    if ( $3 == Espada.Forjada ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Forjada 130 }
+    if ( $3 == Espada.Bronze ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Bronze 150 }
+    if ( $3 == Espada.Prata ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Prata 170 }
+    if ( $3 == Espada.Aço ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Aço 160 }
+    if ( $3 == Espada.Negra ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Negra 190 }
+    if ( $3 == Espada.fanstasma ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Fantasma 210 }
+    if ( $3 == Espada.Espectral ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Espectral 230 }
+    if ( $3 == Espada.Dourada ) { /writeini golpes\ $+ $nick $+ .ini $nick Espada.Dourada 300 }
+    /msg =$nick 2(14 Arma2: $3 14Comprada com sucesso 2)
+    /msg =$nick 2(14 Você ficou com2: $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14de Dinheiro 2)
+  }
+}
+
+on *:chat:.Escudos: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Escudos0,0----------------------2Compra0,0----------------------2Venda )
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2( Escudo.Madeira 0_____________14 1.000 0______________________14 500 )
+    /msg =$nick 2( Escudo.Ferro 0_______________14 3.000 0______________________14 1.500 )
+    /msg =$nick 2( Escudo.Aço 0_________________14 4.000 0______________________14 2.000 )
+    /msg =$nick 2( Escudo.Pequeno 0_____________14 7.000 0______________________14 3.500 )
+    /msg =$nick 2( Escudo.Medio 0_______________14 7.000 0______________________14 3.500 )
+    /msg =$nick 2( Escudo.Grande 0______________14 10.000 0_____________________14 5.000 )
+    /msg =$nick 2( Escudo.Bronze 0______________14 18.000 0_____________________14 9.000 )
+    /msg =$nick 2( Escudo.Prata 0_______________14 30.000 0_____________________14 15.000 )
+    /msg =$nick 2( Escudo.Negro 0_______________14 50.000 0_____________________14 25.000 )
+    /msg =$nick 2( Escudo.Fantasma 0____________14 80.000 0_____________________14 40.000 )
+    /msg =$nick 2( Escudo.Espectral 0___________14 100.000 0____________________14 50.000 )
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2(14 Digite2: .14Comprar Escudo 2<14Escudo2> )
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2(14 Digite2: .14Vender Escudo 2<14Escudo2> )
+    /msg =$nick 0,0CdzForever AutoLutas
+  }
+}
+
+on *:chat:.Comprar Escudo*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$3 { /msg =$nick 2(14 Coloque o nome do escudo que você deseja 2) | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Trabalhando ) {
+    /msg =$nick 2(4 ERRO:14 Você está trabalhando2,14 nao pode comprar escudos 2) | halt }
+    if ( $readini(Lojas.ini,itens,$3) == $null ) {
+    /msg =$nick 2(4 ERRO:14 O Escudo2 $3 14não existe 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,escudo) != nenhum ) { 
+      /msg =$nick 2(4 ERRO:14 Você já está equipado com o escudo2: $readini(cadastros\ $+ $nick $+ .ini,$nick,escudo) 2)
+      /msg =$nick 2(14 Para pegar um novo escudo você terá que vender seu escudo 2)
+    /msg =$nick 2(14 Digite2: .14Vender Escudo 2<14escudo2> 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) < $readini(lojas.ini,itens,$3) ) {
+      /msg =$nick 2(4 ERRO:14 Você tem2: $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14De dinheiro  2)
+    /msg =$nick 2( $3 14Custa2: $readini(lojas.ini,itens,$3) 2) | halt }
+    /writeini cadastros\ $+ $nick $+ .ini $nick Dinheiro $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) - $readini(lojas.ini,itens,$3) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Escudo $3
+    if ( $3 == Escudo.Madeira ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 2) }
+    if ( $3 == Escudo.Ferro ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 6) }
+    if ( $3 == Escudo.Aço ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 8) }
+    if ( $3 == Escudo.Pequeno ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 15) }
+    if ( $3 == Escudo.Medio ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 18) }
+    if ( $3 == Escudo.Grande ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 25) }
+    if ( $3 == Escudo.Bronze ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 30) }
+    if ( $3 == Escudo.Prata ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 45) }
+    if ( $3 == Escudo.Negro ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 60) }
+    if ( $3 == Escudo.Fantasma ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 80) }
+    if ( $3 == Escudo.Espectral ) { /writeini cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 100) }
+    /msg =$nick 2(14 Escudo2: $3 14Comprada com sucesso 2)
+    /msg =$nick 2(14 Você ficou com2: $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14de Dinheiro 2)
+  }
+}
+
+on *:chat:.Poções: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(2 Poções0,0----------------------------------------2Preço )
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2( Poção.ATK 0____________________________________14 5.000 2)
+    /msg =$nick 2( Poção.DEF 0____________________________________14 5.000 2)
+    /msg =$nick 2( Poção.AGL 0____________________________________14 5.000 2)
+    /msg =$nick 2( Poção.MP 0_____________________________________14 5.000 2)
+    /msg =$nick 2( Poção.Cosmo 0__________________________________14 5.000 2)
+    /msg =$nick 2( Poção.HP 0_____________________________________14 15.000 2)
+    /msg =$nick 0,0CdzForever AutoLutas
+    /msg =$nick 2(14 Digite2: .14Comprar Poção 2<14Poção2> )
+    /msg =$nick 0,0CdzForever AutoLutas
+  }
+}
+
+on *:chat:.Comprar Poção*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$3 { /msg =$nick 2(14 Coloque o nome da poção que você deseja 2) | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Trabalhando ) {
+    /msg =$nick 2(4 ERRO:14 Você está trabalhando2,14 nao pode comprar poções 2) | halt }
+    if ( $readini(Lojas.ini,itens,$3) == $null ) {
+    /msg =$nick 2(4 ERRO:14 A Poção2 $3 14não existe 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) < $readini(lojas.ini,itens,$3) ) {
+      /msg =$nick 2(4 ERRO:14 Você tem2: $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14De dinheiro 2)
+    /msg =$nick 2(2 $3 14Custa2: $readini(lojas.ini,itens,$3) 2) | halt }
+    /writeini cadastros\ $+ $nick $+ .ini $nick Dinheiro $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) - $readini(lojas.ini,itens,$3) )
+    if ( $3 == Poção.ATK ) { /writeini Cadastros\ $+ $nick $+ .ini $nick Ataque $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,Ataque) + 5) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoATK $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoATK) + 1 ) }
+    if ( $3 == Poção.DEF ) { /writeini Cadastros\ $+ $nick $+ .ini $nick Defesa $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa) + 5) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoDEF $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoDEF) + 1 ) }
+    if ( $3 == Poção.AGL ) { /writeini Cadastros\ $+ $nick $+ .ini $nick Agilidade $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,agilidade) + 5) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoAGL $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoAGL) + 1 ) }
+    if ( $3 == Poção.Hp ) { /writeini Cadastros\ $+ $nick $+ .ini $nick hpmax $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) + 50 ) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoHp $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoHp) + 1 ) }
+    if ( $3 == Poção.Mp ) { /writeini Cadastros\ $+ $nick $+ .ini $nick MpMax $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax) + 10 ) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoMp $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoMp) + 1 ) }
+    if ( $3 == Poção.Cosmo ) { /writeini Cadastros\ $+ $nick $+ .ini $nick Cosmo $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,cosmo) + 200) | /writeini cadastros\ $+ $nick $+ .ini $nick poçãoCosmo $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,PoçãoCosmo) + 1 ) }
+    /msg =$nick 2(14 Poção2: $3 14Comprada com sucesso 2)
+    /msg =$nick 2(14 Você ficou com2: $readini(cadastros\ $+ $nick $+ .ini,$nick,dinheiro) 14de Dinheiro 2)
+  }
+}

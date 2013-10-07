@@ -1,0 +1,15 @@
+alias fimtreinomedio {
+  /set %rand $rand(220,300)
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Exp $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) + %rand )
+  /msg = $+ %ganhador 2(14 Você ganhou2 %rand 14de2 Exp )
+  /set %bonus1 $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,bonus) + 10 )
+  /set %nivel $calc($readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,nivel) + 1)
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) ) {
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) ) && ( %nivel == 2 ) { /writeini cadastros\ $+ %ganhador $+ .ini $nick Golpes $readini(cadastros\ $+ %ganhador $+ .ini,$nick,golpes) - Chute | /writeini golpes\ $+ %ganhador $+ .ini $nick Chute 28 | /msg = $+ %ganhador Você aprendeu o Golpe: Chute }
+    /writeini cadastros\ $+ %ganhador $+ .ini $nick nivel %nivel
+    /writeini cadastros\ $+ %ganhador $+ .ini $nick Hpmax $calc( $readini(cadastros\ $+ %ganhador $+ .ini,$nick,Hpmax) + 50 )
+    /writeini cadastros\ $+ %ganhador $+ .ini $nick MpMax $calc( $readini(cadastros\ $+ %ganhador $+ .ini,$nick,mpmax) + 10 )
+    /writeini cadastros\ $+ %ganhador $+ .ini $nick Cosmo $calc( $readini(cadastros\ $+ %ganhador $+ .ini,$nick,Cosmo) + 200 )
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador bonus %bonus1
+  }
+}

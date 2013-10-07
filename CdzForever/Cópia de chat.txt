@@ -1,0 +1,27 @@
+on *:CHAT:*: {
+ if $left($1-,1) == . { halt }
+ if $left($1-,1) == ! { halt }
+ if $left($1-,1) == @ { halt }
+ .set %opennum 1
+ If ( $readini(clanf.ini,$nick,id) == 2 ) {
+ while (%opennum <= $chat(0)) {
+ if ($chat(%opennum) != $nick) {
+ If ( $readini(clanf.ini,$chat(%opennum),id) == 2 ) {
+ /msg = $+ $chat(%opennum) < $+ $nick $+ > $1-
+}
+}
+ inc %opennum
+}
+}
+ if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) { 
+ .set %total $chat(0)
+ .set %x 1
+ while (%x <= %total) {
+ .set %nick $chat(%x)
+ if $nick != %nick {
+ /msg = $+ %nick < $+ $nick $+ > $1-
+}
+ inc %x
+}
+ .halt
+}

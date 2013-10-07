@@ -1,0 +1,113 @@
+off *:chat:.Guerra*: {
+  if ($nick !ison #Cdzforever) { //close -c $nick | halt ) }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /set %rei $readini(clans\ $+ $2 $+ .ini,$2,rei)
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,cargo) != Rei ) {
+    /msg =$nick ERRO: Você não é o Rei de seu Clan | halt }
+    if ( $readini(cadastros\ $+ %rei $+ .ini,%rei,id) == 0 ) {
+    /msgs =$nick ERRO: o Rei do Clan $2 não está OnLine | halt }
+    if ( $readini(clans.ini,$2,pontos) == $Null ) {
+    /msg =$nick ERRO: o Clan $2 não existe | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Sim ) {
+    /msg =$nick ERRO: o Clan %Clan já está em Guerra | halt }
+    if ( $readini(clans\ $+ $2 $+ .ini,$2,guerra) == Sim ) {
+    /msg =$nick ERRO: o Clan $2 já está em Guerra | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Talvez ) {
+    /msg =$nick ERRO: o Clan %Clan já está a espera de uma Guerra | halt }
+    if ( $readini(clans\ $+ $2 $+ .ini,$2,guerra) == Talvez ) {
+    /msg =$nick ERRO: o Clan $2 já está a espera de uma Guerra | halt }
+    /writeini clans\ $+ %clan $+ .ini %clan Guerra Talvez
+    /writeini clans\ $+ %clan $+ .ini %clan Contra $2
+    /writeini clans\ $+ $2 $+ .ini $2 Guerra Talvez
+    /writeini clans\ $+ $2 $+ .ini $2 Contra %clan
+    /msg = $+ %rei o Clan %Clan Está Lhe desafiando para uma Guerra
+    /msg = $+ %rei Para Aceitar: .Entrar
+    /msg = $+ %rei Para Recusar: .Sair
+  }
+}
+
+off *:chat:.Entrar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /set %contra $readini(clans\ $+ %clan $+ .ini,%clan,Contra)
+    /set %rei $readini(clans\ $+ %contra $+ .ini,%contra,rei)
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Sim ) {
+    /msg =$nick ERRO: o Clan %Clan já está em Guerra | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Nao ) {
+    /msg =$nick ERRO: o Clan %Clan não foi Convidado para uma Guerra | halt }
+    var %x = 1 | var %z = 0 
+    while %x <= $chat(0) {
+      if $readini(cadastros.ini,$chat(%x),nick) { inc %z } 
+      /set %logados $readini(cadastros\ $+ $chat(%x) $+ .ini,$chat(%x),Clan) == %Clan )
+      inc %x
+    }
+    if ( %Logados < 5 ) {
+    /msg =$nick ERRO: Tem Menos de 5 Membros do seu clan No bot neste momento | halt }
+    /writeini clans\ $+ %clan $+ .ini %clan Guerra Sim
+    /writeini clans\ $+ %contra $+ .ini %contra Guerra Sim
+    /msg =$nick Seu Clan Entrou em Guerra contra o Clan %Contra
+    /msg = $+ %Logados Seu Clan Entrou em Guerra Contra o Clan %Contra
+    /msg = $+ %rei Seu Clan Entrou em Guerra Contra o Clan %Clan
+    /set %opennum 1
+    while (%opennum <= $chat(0)) {
+      /set %nick $chat(%opennum)
+      if ( %nick != $nick) { 
+        /msg = $+ %nick Guerra entre %Clan e %Contra
+      }
+      inc %opennum
+    }
+  }
+}
+
+off *:chat:.Sair*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /set %contra $readini(clans\ $+ %clan $+ .ini,%clan,Contra)
+    /set %rei $readini(clans\ $+ %contra $+ .ini,%contra,rei)
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Sim ) {
+    /msg =$nick ERRO: o Clan %Clan já está em Guerra | halt }
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,guerra) == Nao ) {
+    /msg =$nick ERRO: o Clan %Clan não foi Convidado para uma Guerra | halt }
+    /writeini clans\ $+ %clan $+ .ini %clan Guerra Nao
+    /writeini clans\ $+ %contra $+ .ini %contra Guerra Nao
+    /msg =$nick Você negou a Guerra contra o Clan %Contra
+    /msg = $+ %rei O Clan %contra negou a Guerra contra seu Clan
+  }
+}

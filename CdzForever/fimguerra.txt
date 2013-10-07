@@ -1,0 +1,299 @@
+alias fimguerra {
+  /set %ganhadorexp $rand(220,300)
+  /set %perdedorexp $rand(100,200)
+  /set %ganhadorpontos $rand(40,50)
+  /set %ganhadordinheiro $rand(220,320)
+  /set %perdedordinheiro $rand(120,220)
+  /set %perdedorpontos $rand(10,20)
+  /set %vitorias $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,vitorias) + 1 )
+  /set %derrotas $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,derrotas) + 1 )
+  /set %jogos1 $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,jogos) + 1 )
+  /set %jogos2 $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,jogos) + 1 )
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador exp $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) + %ganhadorexp )
+  /writeini top.ini %ganhador Experiência $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) 
+  /writeini cadastros\ $+ %perdedor $+ .ini %perdedor exp $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,exp) + %perdedorexp )
+  /writeini top.ini %perdedor Experiência  $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,exp)
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Dinheiro $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,dinheiro) + %ganhadordinheiro )
+  /writeini top.ini %ganhador Dinheiro $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,dinheiro)
+  /writeini cadastros\ $+ %perdedor $+ .ini %perdedor Dinheiro $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,dinheiro) + %perdedordinheiro )
+  /writeini top.ini %perdedor Dinheiro $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,dinheiro)
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador vitorias %vitorias
+  /writeini cadastros\ $+ %perdedor $+ .ini %perdedor derrotas %derrotas
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador jogos %jogos1
+  /writeini cadastros\ $+ %perdedor $+ .ini %perdedor jogos %jogos2
+  /msg = $+ %ganhador 2(14 Você ganhou2 %ganhadorexp 14de Exp )
+  /msg = $+ %perdedor 2(14 Você ganhou2 %perdedorexp 14de Exp ) 
+  if ( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,armadura) != Nenhuma ) && ( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,hpmaxarm) > 10 ) {
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador HpArm $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,hparm) - $rand(5,10) ) }
+  if ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,armadura) != Nenhuma ) && ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,hpmaxarm) > 10 ) {
+  /writeini cadastros\ $+ %perdedor $+ .ini %perdedor HpArm $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,hparm) - $rand(5,10) ) }
+  if ( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,clan) != nenhum ) {
+  /set %clan $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,clan)
+  /writeini clans\ $+ %clan $+ .ini %clan pontos $calc( $readini(clans\ $+ %clan $+ .ini,%clan,pontos) + %ganhadorpontos )
+  /writeini clans\ $+ %clan $+ .ini %clan vitorias $calc( $readini(clans\ $+ %clan $+ .ini,%clan,vitorias) + 1 ) 
+  /writeini clans\ $+ %clan $+ .ini %clan jogos $calc( $readini(clans\ $+ %clan $+ .ini,%clan,jogos) + 1 ) 
+  /writeini clans.ini %clan Pontos $readini(clans\ $+ %clan $+ .ini,%clan,pontos) }
+  if ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,clan) != nenhum ) {
+  /set %clan $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,clan)
+  /writeini clans\ $+ %clan $+ .ini %clan pontos $calc( $readini(clans\ $+ %clan $+ .ini,%clan,pontos) + %perdedorpontos )
+  /writeini clans\ $+ %clan $+ .ini %clan derrotas $calc( $readini(clans\ $+ %clan $+ .ini,%clan,derrotas) + 1 )
+  /writeini clans\ $+ %clan $+ .ini %clan jogos $calc( $readini(clans\ $+ %clan $+ .ini,%clan,jogos) + 1 ) 
+  /writeini clans.ini %clan Pontos $readini(clans\ $+ %clan $+ .ini,%clan,pontos) }
+  /set %bonus1 $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,bonus) + 10 )
+  /set %bonus2 $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,bonus) + 10 )
+  /set %nivel $calc($readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,nivel) + 1)
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) ) {
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) ) && ( %nivel == 2 ) { /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Golpes $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,golpes) - Chute | /writeini golpes\ $+ %ganhador $+ .ini %ganhador Chute 28 | /msg = $+ %ganhador 2(14 Você aprendeu o Golpe2: Chute ) }
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,exp) ) && ( %nivel == 5 ) { /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Golpes $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,golpes) - Bola.De.Cosmo | /writeini golpes\ $+ %ganhador $+ .ini %ganhador bola.De.Cosmo 35 | /msg = $+ %ganhador 2(14 Você aprendeu o Golpe2: Bola.De.Cosmo ) }
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador nivel %nivel
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Hpmax $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,Hpmax) + 50 )
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador MpMax $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,mpmax) + 10 )
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador Cosmo $calc( $readini(cadastros\ $+ %ganhador $+ .ini,%ganhador,Cosmo) + 200 )
+    /writeini cadastros\ $+ %ganhador $+ .ini %ganhador bonus %bonus1
+}
+  /set %nivel $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,nivel) + 1 )
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,exp) ) {
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,exp) ) && ( %nivel == 2 ) { /writeini cadastros\ $+ %perdedor $+ .ini %perdedor Golpes $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,golpes) - Chute | /writeini golpes\ $+ %perdedor $+ .ini %perdedor Chute 28 | /msg = $+ %perdedor 2(14 Você aprendeu o Golpe2: Chute ) }
+  if ( $readini(niveis.ini,%nivel,exp) <= $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,exp) ) && ( %nivel == 5 ) { /writeini cadastros\ $+ %perdedor $+ .ini %perdedor Golpes $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,golpes) - Bola.De.Cosmo | /writeini golpes\ $+ %perdedor $+ .ini %perdedor bola.De.Cosmo 35 | /msg = $+ %perdedor 2(14 Você aprendeu o Golpe2: Bola.De.Cosmo ) }
+    /writeini cadastros\ $+ %perdedor $+ .ini %perdedor nivel %nivel
+    /writeini cadastros\ $+ %perdedor $+ .ini %perdedor Hpmax $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,Hpmax) + 50 )
+    /writeini cadastros\ $+ %perdedor $+ .ini %perdedor MpMax $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,mpmax) + 10 )
+    /writeini cadastros\ $+ %perdedor $+ .ini %perdedor Cosmo $calc( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,Cosmo) + 200 )
+    /writeini cadastros\ $+ %perdedor $+ .ini %perdedor bonus %bonus1
+  }
+  if ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,hp) < 1 ) {
+    /msg = $+ %perdedor 2(14 Para recuperar seu Hp2,14 Digite2: .Recuperar Hp )
+  }
+  if ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,mp) < 1 ) {
+    /msg = $+ %perdedor 2(14 Para recuperar seu Mp2,14 Digite2: .Recuperar Mp )
+}
+  if ( $readini(cadastros\ $+ %perdedor $+ .ini,%perdedor,Hparm) < 10 ) {
+    /msg = $+ %perdedor 2(14 Para Restaurar sua 2Armadura,14 Digite2: .Mú de Aries )
+  }
+}
+
+on *:chat:.Recuperar Hp: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+        /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+     /msg =$nick 2(4 ERRO:14 Você está sendo 2Desafiado )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafiando) == 6 ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Desafiando14 alguem 2)
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Lutando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+        /msg =$nick 2(4 ERRO:14 Você está 2Treinando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+       /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+        writeini autoluta\ $+ $nick $+ .ini $nick desafio 7
+        /msg =$nick 2(14 Agora são2 $Time )
+        /msg =$nick 2(14 Daqui a2 1 14Minuto você estará2 Recuperado )
+        .timerrecup1 $+ $nick 1 60 /msg =$nick 2(14 Você está 2Recuperado 7»2 Hp14: $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) $+ 2/14 $+ $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) 2)
+        .timerrecup2 $+ $nick 1 60 /set %hpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax)
+        .timerrecup3 $+ $nick 1 60 /writeini cadastros\ $+ $nick $+ .ini $nick hp $readini cadastros\ $+ $nick $+ .ini $nick hpmax
+        .timerrecup4 $+ $nick 1 60 /remini autoluta\ $+ $nick $+ .ini $nick desafio
+        .timerrecup5 $+ $nick 1 60 /writeini autoluta\ $+ $nick $+ .ini $nick lutando nao
+    }
+  }
+}
+
+on *:chat:.Recuperar Mp: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+        /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+     /msg =$nick 2(4 ERRO:14 Você está sendo 2Desafiado )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafiando) == 6 ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Desafiando14 alguem 2)
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Lutando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+        /msg =$nick 2(4 ERRO:14 Você está 2Treinando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+       /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+        writeini autoluta\ $+ $nick $+ .ini $nick desafio 7
+        /msg =$nick 2(14 Agora são2 $Time )
+        /msg =$nick 2(14 Daqui a2 2 14Minutos você estará2 Recuperado )
+        .timerrecup1 $+ $nick 1 120 /msg =$nick 2(14 Você está 2Recuperado 7»2 Mp14: $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax) $+ 2/14 $+ $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax) 2)
+        .timerrecup2 $+ $nick 1 120 /set %mpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax)
+        .timerrecup3 $+ $nick 1 120 /writeini cadastros\ $+ $nick $+ .ini $nick mp $readini cadastros\ $+ $nick $+ .ini $nick mpmax
+        .timerrecup4 $+ $nick 1 120 /remini autoluta\ $+ $nick $+ .ini $nick desafio
+        .timerrecup5 $+ $nick 1 120 /writeini autoluta\ $+ $nick $+ .ini $nick lutando nao
+    }
+  }
+}
+
+on *:chat:.Mú de Aries: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+        /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+     /msg =$nick 2(4 ERRO:14 Você está sendo 2Desafiado )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafiando) == 6 ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Desafiando14 alguem 2)
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Lutando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+        /msg =$nick 2(4 ERRO:14 Você está 2Treinando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+       /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,armadura) == nenhuma) {
+      /msg =$nick 2(14 Olá2 $nick $+ ,14 sou 2Mú,14 Cavaleiros de 2Aries )
+      /msg =$nick 2(14 Volte aqui quando pegar sua 2Armadura! ) | halt }
+      /msg =$nick 2(14 Olá2 $nick $+ ,14 sou 2Mú,14 Cavaleiros de 2Aries )
+      /msg =$nick 2(14 Deixe2-14me analizar sua 2Armadura )
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 0 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 10 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 10 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 20 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 20 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 30 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 30 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 40 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 40 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 50 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 50 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 60 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 60 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 70 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 70 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 80 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 80 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 90 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,150 2)
+      }
+      if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) > 90 ) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) <= 100 ) {
+      /msg =$nick 2(14 Hum vejamos2...14O status de sua 2Armadura14 é de2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hparm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2,15 2)
+      }
+      /msg =$nick 2(14 Digite2: .Restaurar )
+    }
+  }
+}
+
+on *:chat:.Restaurar: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+        /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+     /msg =$nick 2(4 ERRO:14 Você está sendo 2Desafiado )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafiando) == 6 ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Desafiando14 alguem 2)
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+       /msg =$nick 2(4 ERRO:14 Você está 2Lutando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+        /msg =$nick 2(4 ERRO:14 Você está 2Treinando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+       /msg =$nick 2(4 ERRO:14 Você Está se 2Recuperando )
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+        writeini autoluta\ $+ $nick $+ .ini $nick desafio 7
+        /msg =$nick 2(14 Restaurando 2Armadura14 de2:14 $readini(cadastros\ $+ $nick $+ .ini,$nick,armadura) 2)
+        /msg =$nick 2(14 Agora são2 $Time )
+        /msg =$nick 2(14 Daqui a2 3 14Minutos sua armadura estará2 Restaurada )
+        .timerrecup1 $+ $nick 1 180 /msg =$nick 2( Armadura Restaurada 7»14 Status Arm2: $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 14/2 $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm) 2)
+        .timerrecup2 $+ $nick 1 180 /set %hparmmax $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmaxarm)
+        .timerrecup3 $+ $nick 1 180 /writeini cadastros\ $+ $nick $+ .ini $nick hparm $readini cadastros\ $+ $nick $+ .ini $nick hpmaxarm
+        .timerrecup4 $+ $nick 1 180 /remini autoluta\ $+ $nick $+ .ini $nick desafio
+        .timerrecup5 $+ $nick 1 180 /writeini autoluta\ $+ $nick $+ .ini $nick lutando nao
+    }
+  }
+}
+

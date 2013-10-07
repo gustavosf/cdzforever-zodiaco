@@ -1,0 +1,238 @@
+off *:chat:.Lutar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick Você não está Cadastrado | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) { 
+    if !$2 { /msg =$nick Comando Inválido | halt }
+    if !$3 { /msg =$nick Comando Inválido | halt }
+    if !$4 { /msg =$nick Comando Inválido | halt }
+    if !$5 { /msg =$nick Comando Inválido | halt }
+    if ( $readini(clanf.ini,luta,nick1) != $Null ) {
+    /msg =$nick ERRO: Já está havendo uma luta 2x2 | halt } 
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,constelação) == $null ) {
+    /msg =$nick ERRO: $2 não está cadastrado | halt }
+    if ( $readini(cadastros\ $+ $3 $+ .ini,$3,constelação) == $null ) {
+    /msg =$nick ERRO: $3 não está cadastrado | halt }
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,constelação) == $null ) {
+    /msg =$nick ERRO: $4 não está cadastrado | halt }
+    if ( $readini(cadastros\ $+ $5 $+ .ini,$5,constelação) == $null ) {
+    /msg =$nick ERRO: $5 não está cadastrado | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,id) == 0 ) {
+    /msg =$nick ERRO: $2 não está identificado | halt }
+    if ( $readini(cadastros\ $+ $3 $+ .ini,$3,id) == 0 ) {
+    /msg =$nick ERRO: $3 não está identificado | halt }
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,id) == 0 ) {
+    /msg =$nick ERRO: $4 não está identificado | halt }
+    if ( $readini(cadastros\ $+ $5 $+ .ini,$5,id) == 0 ) {
+    /msg =$nick ERRO: $5 não está identificado | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,clan) != $readini(cadastros\ $+ $3 $+ .ini,$3,clan) ) {
+    /msg =$nick ERRO: $2 e $3 não são do mesmo clan | halt }
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,clan) != $readini(cadastros\ $+ $5 $+ .ini,$5,clan) ) {
+    /msg =$nick ERRO: $4 e $5 não são do mesmo clan | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Sim ) {
+    /msg =$nick ERRO: Você está lutando | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+    /msg =$nick ERRO: Você está sendo desafiado | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiando ) {
+    /msg =$nick ERRO: Você está desafiando alguem | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+    /msg =$nick ERRO: Você está treinando | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: Você está trabalhando | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,desafio) == 7 ) {
+    /msg =$nick ERRO: Você está se recuperando | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) <= 0 ) {
+    /msg =$nick ERRO: Você não tem Hp suficiente | halt }
+    if ( $readini(listando.ini,$nick,listando) == listando ) {
+    /msg =$nick ERRO: Você está listando, Digite: .Deslistar | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,lutando) == Sim ) {
+    /msg =$nick ERRO: $2 está lutando | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,lutando) == desafiado ) {
+    /msg =$nick ERRO: $2 está sendo desafiado | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,lutando) == desafiando ) {
+    /msg =$nick ERRO: $2 está desafiando alguem | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,lutando) == treinando ) {
+    /msg =$nick ERRO: $2 está treinando | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: $2 está trabalhando | halt }
+    if ( $readini(autoluta\ $+ $2 $+ .ini,$2,desafio) == 7 ) {
+    /msg =$nick ERRO: $2 está se recuperando | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,hp) <= 0 ) {
+    /msg =$nick ERRO: $2 não tem Hp suficiente | halt }
+    if ( $readini(listando.ini,$2,listando) == listando ) {
+    /msg =$nick ERRO: $2 está listando | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,lutando) == Sim ) {
+    /msg =$nick ERRO: $3 está lutando | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,lutando) == desafiado ) {
+    /msg =$nick ERRO: $3 está sendo desafiado | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,lutando) == desafiando ) {
+    /msg =$nick ERRO: $3 está desafiando alguem | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,lutando) == treinando ) {
+    /msg =$nick ERRO: $3 está treinando | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: $3 está trabalhando | halt }
+    if ( $readini(autoluta\ $+ $3 $+ .ini,$3,desafio) == 7 ) {
+    /msg =$nick ERRO: $3 está se recuperando | halt }
+    if ( $readini(cadastros\ $+ $3 $+ .ini,$3,hp) <= 0 ) {
+    /msg =$nick ERRO: $3 não tem Hp suficiente | halt }
+    if ( $readini(listando.ini,$3,listando) == listando ) {
+    /msg =$nick ERRO: $3 está listando | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,lutando) == Sim ) {
+    /msg =$nick ERRO: $4 está lutando | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,lutando) == desafiado ) {
+    /msg =$nick ERRO: $4 está sendo desafiado | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,lutando) == desafiando ) {
+    /msg =$nick ERRO: $4 está desafiando alguem | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,lutando) == treinando ) {
+    /msg =$nick ERRO: $4 está treinando | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: $4 está trabalhando | halt }
+    if ( $readini(autoluta\ $+ $4 $+ .ini,$4,desafio) == 7 ) {
+    /msg =$nick ERRO: $4 está se recuperando | halt }
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,hp) <= 0 ) {
+    /msg =$nick ERRO: $4 não tem Hp suficiente | halt }
+    if ( $readini(listando.ini,$4,listando) == listando ) {
+    /msg =$nick ERRO: $4 está listando | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,lutando) == Sim ) {
+    /msg =$nick ERRO: $5 está lutando | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,lutando) == desafiado ) {
+    /msg =$nick ERRO: $5 está sendo desafiado | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,lutando) == desafiando ) {
+    /msg =$nick ERRO: $5 está desafiando alguem | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,lutando) == treinando ) {
+    /msg =$nick ERRO: $5 está treinando | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,lutando) == Trabalhando ) {
+    /msg =$nick ERRO: $5 está trabalhando | halt }
+    if ( $readini(autoluta\ $+ $5 $+ .ini,$5,desafio) == 7 ) {
+    /msg =$nick ERRO: $5 está se recuperando | halt }
+    if ( $readini(cadastros\ $+ $5 $+ .ini,$5,hp) <= 0 ) {
+    /msg =$nick ERRO: $5 não tem Hp suficiente | halt }
+    if ( $readini(listando.ini,$5,listando) == listando ) {
+    /msg =$nick ERRO: $5 está listando | halt }
+    /writeini clanf.ini luta nick1 $2
+    /writeini clanf.ini luta nick2 $3
+    /writeini clanf.ini luta nick3 $4
+    /writeini clanf.ini luta nick4 $5
+    /set %n1 $readini(clanf.ini,luta,nick1)
+    /set %n2 $readini(clanf.ini,luta,nick2)
+    /set %n3 $readini(clanf.ini,luta,nick3)
+    /set %n4 $readini(clanf.ini,luta,nick4)
+    /msg = $+ %n1 $nick Está lhe convidando para uma Luta 2x2 
+    /msg = $+ %n1 Luta: $2 e $3 Vs $4 e $5
+    /msg = $+ %n1 Para aceitar, Digite: .Entrar
+    /msg = $+ %n1 Para recusar, Digite: .Recusar
+    /msg = $+ %n2 $nick Está lhe convidando para uma Luta 2x2 
+    /msg = $+ %n2 Luta: $2 e $3 Vs $4 e $5
+    /msg = $+ %n2 Para aceitar, Digite: .Entrar
+    /msg = $+ %n2 Para recusar, Digite: .Recusar
+    /msg = $+ %n3 $nick Está lhe convidando para uma Luta 2x2 
+    /msg = $+ %n3 Luta: $2 e $3 Vs $4 e $5
+    /msg = $+ %n3 Para aceitar, Digite: .Entrar
+    /msg = $+ %n3 Para recusar, Digite: .Recusar
+    /msg = $+ %n4 $nick Está lhe convidando para uma Luta 2x2 
+    /msg = $+ %n4 Luta: $2 e $3 Vs $4 e $5
+    /msg = $+ %n4 Para aceitar, Digite: .Entrar
+    /msg = $+ %n4 Para recusar, Digite: .Sair
+    /timer1 $+ clanf 1 120 /remini clanf.ini luta
+    /timer2 $+ clanf 1 120 /msg = $+ %n1 Acabou o Tempo, 2x2 Cancelado!
+    /timer3 $+ clanf 1 120 /msg = $+ %n2 Acabou o tempo, 2x2 Cancelado!
+    /timer4 $+ clanf 1 120 /msg = $+ %n3 Acabou o tempo, 2x2 Cancelado!
+    /timer5 $+ clanf 1 120 /msg = $+ %n4 Acabou o tempo, 2x2 Cancelado!
+  }
+}
+
+off *:chat:.Entrar: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick Você não está Cadastrado | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) { 
+    /timer1 $+ clanf off
+    /timer2 $+ clanf off
+    /timer3 $+ clanf off
+    /timer4 $+ clanf off
+    /timer5 $+ clanf off
+    /set %n1 $readini(clanf.ini,luta,nick1)
+    /set %n2 $readini(clanf.ini,luta,nick2)
+    /set %n3 $readini(clanf.ini,luta,nick3)
+    /set %n4 $readini(clanf.ini,luta,nick4)
+    if ( $nick != %n1 ) && ( $nick != %n2 ) && ( $nick != %n3 ) && ( $nick != %n4 ) {
+    /msg =$nick ERRO: Você não foi convidado para um 2x2 | halt }
+    if ( $readini( autoluta\ $+ $nick $+ .ini,$nick,lutando) == Clanf ) {
+    /msg =$nick ERRO: Você Já entrou no 2x2 | halt }
+    if ( $nick == %n1 ) { /writeini autoluta\ $+ $nick $+ .ini $nick oponente %n4 }
+    if ( $nick != %n1 ) { /writeini autoluta\ $+ $nick $+ .ini $nick vez vez }
+    if ( $nick != %n1 ) { /writeini autoluta\ $+ $nick $+ .ini $nick vez vez }
+    if ( $nick != %n1 ) { /writeini autoluta\ $+ $nick $+ .ini $nick vez vez }
+    /writeini autoluta\ $+ $nick $+ .ini $nick lutando clanf
+    /writeini autoluta\ $+ $nick $+ .ini $nick hp $readini cadastros\ $+ $nick $+ .ini $nick Hp
+    /writeini autoluta\ $+ $nick $+ .ini $nick ataque $readini cadastros\ $+ $nick $+ .ini $nick ataque
+    /writeini autoluta\ $+ $nick $+ .ini $nick defesa $readini cadastros\ $+ $nick $+ .ini $nick defesa
+    /writeini autoluta\ $+ $nick $+ .ini $nick hpmax $readini cadastros\ $+ $nick $+ .ini $nick hpmax
+    /writeini autoluta\ $+ $nick $+ .ini $nick Agilidade $readini cadastros\ $+ $nick $+ .ini $nick Agilidade
+    /writeini autoluta\ $+ $nick $+ .ini $nick mp $readini cadastros\ $+ $nick $+ .ini $nick mp
+    /writeini autoluta\ $+ $nick $+ .ini $nick mpmax $readini cadastros\ $+ $nick $+ .ini $nick mpmax
+    /msg = $+ %n1 $nick Entrou no 2x2
+    /msg = $+ %n2 $nick Entrou no 2x2
+    /msg = $+ %n3 $nick Entrou no 2x2
+    /msg = $+ %n4 $nick Entrou no 2x2
+    }
+    if ( $nick == %n1 ) { 
+    /msg = $+ %n1 Você começa atacando em %n4 $+ , Digite: .Atacar <ataque>
+    }
+    /msg = $+ %n2 %n1 Começa atacando em %n4 $+ , Aguarde
+    /msg = $+ %n3 %n1 Começa atacando em %n4 $+ , Aguarde
+    /msg = $+ %n4 %n1 Começa atacando em %n4 $+ , Aguarde
+}
+
+off *:chat:.Sair: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick Você não está Cadastrado | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick Você não esta Identificado
+      /msg =$nick Digite .Login <senha>
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) { 
+    if ( $nick != %n1 ) && ( $nick != %n2 ) && ( $nick != %n3 ) && ( $nick != %n4 ) {
+    /msg =$nick ERRO: Você não foi convidado para um 2x2 | halt }
+    if ( $readini( autoluta\ $+ $nick $+ .ini,$nick,lutando) == Clanf ) {
+    /msg =$nick ERRO: Você Já entrou no 2x2 | halt }
+    /timer1 $+ clanf off
+    /timer2 $+ clanf off
+    /timer3 $+ clanf off
+    /timer4 $+ clanf off
+    /timer5 $+ clanf off
+    /set %n1 $readini(clanf.ini,luta,nick1)
+    /set %n2 $readini(clanf.ini,luta,nick2)
+    /set %n3 $readini(clanf.ini,luta,nick3)
+    /set %n4 $readini(clanf.ini,luta,nick4)
+    /msg = $+ %n1 $nick Não Aceitou, 2x2 Cancelado!
+    /msg = $+ %n2 $nick Não Aceitou, 2x2 Cancelado!
+    /msg = $+ %n3 $nick Não Aceitou, 2x2 Cancelado!
+    /msg = $+ %n4 $nick Não Aceitou, 2x2 Cancelado!
+    /remini clanf.ini luta
+  }
+}

@@ -1,0 +1,357 @@
+on *:chat:@Set*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    if !$2 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if ( $2 == Op ) { 
+    /writeini operadores.ini $3 op Sim
+    /msg =$nick 2(14 Você Adicionou2 $3 14como 2@14p2! )
+    /msg $3 2(14 Você foi Adicionado como 2Operador14 por2 $nick 2)
+    /msg $3 2(14 Para se logar2,14 Digite no Chat do BoT2: .14Login opautob 2)
+    }
+    if ( $2 == Admin ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    /writeini admins.ini $3 admin Sim
+    /msg =$nick 2(14 Você Adicionou2 $3 14como 2Admin2! )
+    /msg $3 2(14 Você foi Adicionado como 2Admin14 por2 $nick 2)
+    /msg $3 2(14 Para se logar2,14 Digite no Chat do BoT2: .14Login adminautob 2)
+    }
+    if ( $2 == Dinheiro ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Dinheiro $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,Dinheiro) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14de Dinheiro para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14de Dinheiro para você. 2)
+    }
+    if ( $2 == Ataque ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Ataque $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,Ataque) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14de Ataque para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14de Ataque para você. 2)
+    }
+    if ( $2 == Defesa ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Defesa $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,Defesa) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14de Defesa para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14de Defesa para você. 2)
+    }
+    if ( $2 == Agilidade ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Agilidade $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,Agilidade) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14de Agilidade para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14de Agilidade para você. 2) 
+    }
+    if ( $2 == Hp ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Hpmax $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,Hpmax) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14de Hp para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14de Hp para você. 2) 
+    }
+    if ( $2 == Level ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 nivel $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,nivel) + $3 )
+    if ( $3 > 0 ) {
+    /set %bonus $calc( 10 * $3 )
+    /writeini cadastros\ $+ $4 $+ .ini $4 Bonus $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,bonus) + %bonus )
+    }
+    /msg =$nick 2(14 Você Setou2 $3 14Leveis e %bonus Pontos para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14Leveis e %bonus Pontos para você. 2) 
+    }
+    if ( $2 == Pontos ) {
+    if ( $readini(cadastros\ $+ $4 $+ .ini,$4,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $4 14não está cadastrado 2) | halt }
+    /writeini cadastros\ $+ $4 $+ .ini $4 Bonus $calc( $readini(cadastros\ $+ $4 $+ .ini,$4,bonus) + $3 )
+    /msg =$nick 2(14 Você Setou2 $3 14Pontos para2 $4 )
+    /msg $4 2( $nick 14Setou2 $3 14Pontos para você. 2)
+    } 
+  }
+}
+
+on *:chat:.Destravar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+   if !$2 { /msg =$nick 2(4 ERRO:14 Coloque o Nome da 2Armadura ) | halt }
+   if !$3 { /msg =$nick 2(4 ERRO:14 Coloque o nick 2) | halt }
+    if ( $readini(armaduras.ini,$2,Dono) == $Null ) {
+    /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14não existe 2) | halt }
+    if ( $readini(armaduras.ini,$2,dono) != Disponível ) { 
+    /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14pertence a2 $readini(armaduras.ini,$2,dono) 2)
+    /msg =$nick 2(14 Para mais informações2,14 Digite2: .14Arm2 $2 2) | halt }
+    if ( $readini(cadastros\ $+ $3 $+ .ini,$3,nick) == $null ) {
+    /msg =$nick 2(4 ERRO2: $3 14não está cadastrado 2) | halt }
+   /writeini cadastros\ $+ $3 $+ .ini $3 destravada $2
+   /msg =$nick 2(14 Você deu acesso a2 $3 14pegar a armadura2 $2 ) 
+   /msg $3 2( $nick 14Lhe deu acesso a pegar a armadura2 $2 )
+  }
+}
+
+on *:chat:@Close*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    if ( $2 == UnL0ad_ ) {
+    /msg =$nick 2(4 Nunca Tente derrubar meu mestre! 2) 
+    /close -c $nick | halt }
+    /close -c $2 
+    /msg =$Nick 2(14 Você derrubou2 $2 14do chat 2) 
+    /msg $2 2( $nick 14Lhe 2derrubou14 do BoT2. )
+   }
+}
+
+on *:text:@Info BoT:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    /msg $nick 2(14 Agora são2 $time 14do dia2 $date )
+    /msg $nick 2( Uptime:14 $iif($server,$gmt($uptime,HH) $+ h $gmt($uptime,nn) $+ m $gmt($uptime,ss) $+ s,Não Conectado) 2)
+    /msg $nick 2(14 Estamos com2 $ini(cadastros.ini,0) 14Cadastrados No momento2! )
+    /msg $nick 2(14 Temos2 $chat(0) 14usuários no BoT neste Momento2! )
+    /msg $nick 2(14 Estamos com2 $nick(#CdzForever,0) 14usuários no canal2! )
+}
+
+on *:text:@Nick*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    if !$2 { /msg $nick 2(14 Coloque um nick 2) | halt }
+    /nick $2
+    /msg $nick 2(14 Você mudou o Nick do BoT para2 $2 )
+    /msg #CdzForever 2( $nick 14Mudou meu Nick 2)
+}
+
+on *:text:@Reconectar*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    if !$2 { /msg $nick 2(14 Coloque um servidor 2) | halt }
+    /server $2
+    /msg $nick 2(14 Você reconectou o BoT no Servidor2 $2 )
+    /msg #CdzForever 2( $nick 14me reconectou2,14 isso pode demorar alguns minutos 2)
+}
+
+on *:text:@Entrar*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    if !$2 { /msg $nick 2(14 Coloque o nome do canal 2) | halt }
+    /j $2
+    /msg $nick 2(14 Você mandou eu entrar no canal2 $2 )
+}
+
+on *:text:@Sair*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    if !$2 { /msg $nick 2(14 Coloque o nome do canal 2) | halt }
+    /part $2
+    /msg $nick 2(14 Você mandou eu sair no canal2 $2 )
+}
+
+on *:text:@Op*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+  if ($2- != $null) { mode #CdzForever +o+o+o $2 $3 $4 | halt }
+  if ($2- == $null) { mode #CdzForever +o $nick | halt }
+}
+
+on *:text:@DeOp*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+  if ($2- != $null) { mode #CdzForever -o-o-o $2 $3 $4 | halt }
+  if ($2- == $null) { mode #CdzForever -o $nick | halt }
+}
+
+on *:text:@voice*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+  if ($2- != $null) { mode #CdzForever +v+v+v $2 $3 $4 | halt }
+  if ($2- == $null) { mode #CdzForever +v $nick | halt }
+}
+
+on *:text:@devoice*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(op.ini,$nick,op) != sim ) {
+  mode #CdzForever -v $nick | halt }
+  if ( $readini(op.ini,$nick,op) == sim ) {
+  if ($2- != $null) { mode #CdzForever -v-v-v $2 $3 $4 | halt }
+  if ($2- == $null) { mode #CdzForever -v $nick | halt }
+}
+}
+
+on *:text:@kick*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg $nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+  if ($2 == UnL0ad_ ) { /kick #CdzForever $nick 2( $nick 14Nunca tente 4Kikar14 meu mestre2! ) | Halt } 
+  /kick #CdzForever $2 $3-
+}
+
+on *:text:@Ban*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+  if ($2 == UnL0ad_ ) { /kick #CdzForever 2( $nick 14Nunca tente 4Banir14 meu mestre2! ) | Halt } 
+  /kick #CdzForever $2 $3-
+  /Ban #CdzForever $2 $3-
+}
+
+on *:text:@UnBan*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    /mode #CdzForever -b $2-
+}
+
+on *:text:@akick*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    //chanserv akick #Cdzforever add $2 $3
+} 
+
+on *:text:@deakick*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    //chanserv akick #Cdzforever del $2 
+} 
+
+on *:text:@Canais*:*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p ou não está identificado 2) | Halt }
+    /msg $nick 14,2(0 Listando Canais: 14)
+    var %meuovo = 0
+    while %meuovo < $chan(0) { 
+      inc %meuovo 
+      var %meuovo.canal $chan(%meuovo) 
+      .msg $nick 2( 7»14 %meuovo.canal 2)
+    }
+    if $chan(0) == 1 { /msg $nick 2(14 Total de2 $chan(0) 14Canal 2) }
+    if $chan(0) > 1 { /msg $nick T2(14otal de2 $chan(0) 14Canais 2) }
+    halt
+} 
+
+
+on *:chat:.Op: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(op.ini,$nick,op) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2@14p não está identificado 2) | Halt }
+    /msg =$nick 14,2(0 Comandos para Ops no Canal ou pvt: 14)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2( @14Info Bot 7»14 Para ver informações sobre o BoT 2)
+    /msg =$nick 2( @14Nick 2<14nick2> 7»14 Para mudar o nick do BoT 2)
+    /msg =$nick 2( @14Entrar 2#14canal 7»14 Para entrar em um canal 2)
+    /msg =$nick 2( @14Sair 2#14canal 7»14 Para sair de um canal 2)
+    /msg =$nick 2( @14Reconectar 2<14servidor2> 7»14 Para reconectar o BoT 2)
+    /msg =$nick 2( @14Canais 7»14 Para ver os Canais em que o BoT está 2)
+    /msg =$nick 2( @14Op 7»2 @14Op 2<14nick2> 2)
+    /msg =$nick 2( @14Deop 7»2 @14Deop 2<14nick2> 2)
+    /msg =$nick 2( @14Voice 7»2 @14Voice 2<14nick2> 2)
+    /msg =$nick 2( @14DeVoice 7»2 @14DeVoice 2<14nick2> 2)
+    /msg =$nick 2( @14Kick 2<14nick2> 2)
+    /msg =$nick 2( @14Ban 2<14nick2/14host2> 2)
+    /msg =$nick 2( @14Unban 2<14nick2/14host2> 2)
+    /msg =$nick 2( @14Akick 2<14nick2> 2<14motivo2> 2)
+    /msg =$nick 2( @14Deakick 2<14nick2> 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.Admin: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    /msg =$nick 14,2(0 Comandos Para admins: 14)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2( @14Set Op 2<14nick2> 2)
+    /msg =$nick 2( @14Set Admin 2<14nick2> 2)
+    /msg =$nick 2( @14Set Dinheiro 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Ataque 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Defesa 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Agilidade 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Hp 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Level 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Set Pontos 2<14quantidade2> 2<14nick2> 2)
+    /msg =$nick 2( @14Close 2<14nick2> 7»14 Fecha o 2Chat14 de alguem com o BoT 2)
+    /msg =$nick 2( .14Tirar 2<14nick2> 7»14 Para tirar a 2armadura14 de alguem 2)
+    /msg =$nick 2( .14Limpar 2<14Armadura2> 7»14 Para deixar uma 2armadura14 Disponível 2)
+    /msg =$nick 2( .14Destravar 2<14Armadura2> 2<14nick2> 7»14 Para destravar uma armadura TipoA 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}

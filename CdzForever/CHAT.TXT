@@ -1,0 +1,17 @@
+on *:CHAT:*: {
+  if $left($1-,1) == . { halt }
+  if $left($1-,1) == ! { halt }
+  if $left($1-,1) == @ { halt }
+  if $left($1-,1) == + { halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) != $null ) {
+   var %x = 1
+  while %x <= $chat(0) {
+  if ( $nick != $chat(%x) ) && ( $readini(cadastros\ $+ $chat(%x) $+ .ini,$chat(%x),nick) != $null ) {
+  if $nick isop #CdzForever { .msg = $+ $chat(%x) 2<2@15/14 $+ $nick $+ 2> $1- }
+  if $nick isvo #CdzForever { .msg = $+ $chat(%x) 2<2+15/14 $+ $nick $+ 2> $1- } 
+  if $nick !isop #CdzForever && $nick !isvo #CdzForever { .msg = $+ $chat(%x) 2<14 $+ $nick $+ 2> $1- } 
+      }   
+      inc %x     
+    }
+  }
+}

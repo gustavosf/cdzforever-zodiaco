@@ -1,0 +1,85 @@
+on *:chat:*:{
+  if (.top isin $strip($1)) {
+    if ($readini(top.ini,$nick,dinheiro) == $null) { msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | return }
+    if !$2 { /msg =$nick 2(4 ERRO:14 Digite 2.Top n° 2) | halt }
+    if ( $2 > 50 ) { /msg =$nick 2(4 ERRO:14 Você só pode ver até o 2Top 50 2) | halt }
+    if ($2 == $null) { set %tpi $ini(top.ini,0) } | else { set %tpi $2 }
+    if ($3 == $null) { set %ttop EXP } | else { set %ttop $3 }
+    if (%ttop != EXP) && (%ttop != DIN) { msg =$nick 2( 4ERRO:14 Só está disponível2 Exp14 e 2Din 2) | return }
+    if (%tpi > $ini(top.ini,0)) { msg =$nick 2(4 ERRO:14 Só temos2 $ini(top.ini,0) 14Cadastrados no momento 2) | return }
+    set %a 1
+    window -hs @top $+ $nick
+    set %total $ini(top.ini,0)
+    while (%a <= %total) {
+      set %nick $ini(top.ini,%a)
+      aline @top $+ $nick $pz($readini(top.ini,%nick,$replace(%ttop,DIN,Dinheiro,EXP,Experiência))) %nick
+      inc %a
+    }
+    set %a $line(@top $+ $nick,0)
+    set %b 1
+    msg =$nick 2(14 Top de2 $replace(%ttop,DIN,Dinheiro,EXP,Experiência) $+ 2: 2) 
+    while (%b <= %tpi) {
+      set %nick $gettok($line(@top $+ $nick,%a),2,32)
+      set %n $abs($gettok($line(@top $+ $nick,%a),1,32))
+      if (%ttop == EXP) { msg =$nick 2(14 %b $+ 2- %nick $str($chr(160),$calc(20 - $len(%nick))) 2Experiência:14 $replace($bytes(%n,b),$chr(44),.)) 2)  }
+      if (%ttop == DIN) { msg =$nick 2(14 %b $+ 2- %nick $str($chr(160),$calc(20 - $len(%nick))) 2Dinheiro:14 $replace($bytes(%n,b),$chr(44),.)) 2)  }
+      inc %b | dec %a
+    }
+    window -c @top $+ $nick
+    msg =$nick 2(14 Fim do 2TOP 2) 
+  }
+  if (+top isin $strip($1)) {
+    if ($readini(top.ini,$nick,Dinheiro) == $null) { msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | return }
+    if ($2 == $null) { set %tpi $ini(top.ini,0) } | else { set %tpi $2 }
+    if ($3 == $null) { set %ttop EXP } | else { set %ttop $3 }
+    if (%ttop != EXP) && (%ttop != DIN) { msg =$nick 2( 4ERRO:14 Só está disponível2 Exp14 e 2Din 2) | return }
+    if (%tpi > $ini(top.ini,0)) { msg =$nick 2(4 ERRO:14 Só temos2 $ini(top.ini,0) 14Cadastrados no momento 2) | return }
+    set %a 1
+    window -hs @top $+ $nick
+    set %total $ini(top.ini,0)
+    while (%a <= %total) {
+      set %nick $ini(top.ini,%a)
+      aline @top $+ $nick $pz($readini(top.ini,%nick,$replace(%ttop,DIN,Dinheiro,EXP,Experiência))) %nick
+      inc %a
+    }
+    set %a $line(@top $+ $nick,0)
+    set %b 1
+    msg =$nick 2(14 Top de2 $replace(%ttop,DIN,Dinheiro,EXP,Experiência) $+ 2: 2) 
+    while (%b <= %tpi) {
+      set %nick $gettok($line(@top $+ $nick,%a),2,32)
+      set %n $abs($gettok($line(@top $+ $nick,%a),1,32))
+      if (%ttop == EXP) { if (%nick != $nick) { msg =$nick 2(14 %b $+ 2- Nick:14 %nick $str($chr(160),$calc(20 - $len(%nick))) 2Experiência:14 $replace($bytes(%n,b),$chr(44),.)) 2) } | else { msg =$nick 2(14Você2) 2 %b $+ 2- Nick:14 %nick $str($chr(160),$calc(20 - $len(%nick))) 2Experiência:14 $replace($bytes(%n,b),$chr(44),.))  } }
+      if (%ttop == DIN) { if (%nick != $nick) { msg =$nick 2(14 %b $+ 2- Nick:14 %nick $str($chr(160),$calc(20 - $len(%nick))) 2Dinheiro:14 $ $+ $replace($bytes(%n,b),$chr(44),.)) 2) } | else { msg =$nick 2(14Você2) 2 %b $+ 2- Nick:14 %nick $str($chr(160),$calc(20 - $len(%nick))) 2Dinheiro:14 $ $+ $replace($bytes(%n,b),$chr(44),.))  } }
+      inc %b | dec %a
+    }
+    window -c @top $+ $nick
+    msg =$nick 2(14 Fim do 2TOP 2) 
+  }
+  else { return }
+}
+
+alias top {
+  unset %nick | unset %eu | unset %return
+  set %tpi $ini(top.ini,0)
+  set %a 1
+  set %eu $1
+  if ($2 == exp) { set %dado Experiência }
+  else { set %dado dinheiro }
+  window -hs @top $+ $nick $+ dados
+  set %total $ini(top.ini,0)
+  while (%a <= %total) {
+    set %nick $ini(top.ini,%a)
+    aline @top $+ $nick $+ dados $pz($readini(top.ini,%nick,%dado)) %nick
+    inc %a
+  }
+  set %a $line(@top $+ $nick $+ dados,0)
+  set %b 1
+  while (%b <= %tpi) {
+    set %nick $gettok($line(@top $+ $nick $+ dados,%a),2,32)
+    if (%nick == %eu) { set %return %b }  
+    inc %b | dec %a
+  }
+  window -c @top $+ $nick $+ dados
+  return %return
+}
+alias pz { return $str(0,$calc(9 - $len($1))) $+ $1 }

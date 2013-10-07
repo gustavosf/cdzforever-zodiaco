@@ -1,0 +1,351 @@
+on *:chat:.Clan: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+ /msg =$nick 2(14 Comandos Disponíveis Para Clans2: )
+ /msg =$nick 2( .Abrir Clan 7»14 Para ver Como Abrir um CLan 2)
+ /msg =$nick 2( .Adicionar 7»14  Para ver Como Adicionar alguem 2)
+ /msg =$nick 2( .2x2 7»14 Para ver como Fazer uma Luta 2x2 2)
+ /msg =$nick 2( .Status 7»14 Para ver o Status de seu clan 2)
+ /msg =$nick 2( .Status 2<14clan2> 7»14 Para ver o Status de algum Clan 2)
+ /msg =$nick 2( .Proposta 2<14clan2> 7»14 Envia um pedido para entrar em um clan ao seu Lider 2)
+ /msg =$nick 2( .Total Cadastrados 7»14 Para ver os Clans Cadastrados 2)
+ /msg =$nick 2( .Fechar Clan 2<14clan2> 2<14senha2> 7»14 Para fechar um Clan 2)
+ /msg =$nick 2( .Sair Clan 7»14 Para sair de seu clan 2)
+  }
+}
+
+on *:chat:.2x2: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(14 Para Abrir uma Luta2 2x2: )
+    /msg =$nick 2(14 Digite2: .14Lutar 2<nick12> <14nick22> <14nick32> <14nick42> )
+    /msg =$nick 2(4 ATENÇÂO:2 <14Nick12>14 Deve ser do 2Mesmo14 clan de 2<14Nick22>14 e 2<14Nick32>14 Deve ser do 2Mesmo14 clan e 2<14Nick42> )
+    /msg =$nick 2(4 Exemplo: 2.14Luta 2Fulano Ciclano UnL0ad_ Hyoga_Di_Cisne )
+  }
+}
+
+on *:chat:.Abrir Clan: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(14 Para formar um Clan Digite2: )
+    /msg =$nick 2( .14Criar Clan 2<14Senha2> <14Local2> <14Nome2> )
+    /msg =$nick 2(4 Exemplo:14 .Criar Clan 2123 Grécia CdzForeverClan 2)
+    /msg =$nick 2(4 Atenção:14 O Nome de Seu Clan nao deve conter Espaços 2)
+  }
+}
+
+on *:chat:.Adicionar: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(14 Para adicionar alguem no seu Clan Digite2: )
+    /msg =$nick 2( .14Adicionar 2<14nick2> <14Clan2> <14Cargo2> )
+    /msg =$nick 2(4 Exemplo:2 .14Adicionar 2Fulando CdzForeverClan Cavaleiro )
+    /msg =$nick 2(4 Atenção:14 Os cavaleiros Adicionados não poderão ser retirados 2)
+  }
+}
+
+on *:chat:.Criar Clan*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$3 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$4 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$5 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) != nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você Já possui um Clan 2) | halt }
+    if ( $readini(clans.ini,$5,nome) != $null ) {
+    /msg =$nick 2(4 ERRO:14 Esse Clan já esxiste 2) | halt }
+    /mkdir clans\
+    /writeini clans.ini $5 Nome $5
+    /writeini clans.ini $5 Pontos 0
+    /writeini clans\ $+ $5 $+ .ini $5 Nome $5
+    /writeini clans\ $+ $5 $+ .ini $5 Senha $3
+    /writeini clans\ $+ $5 $+ .ini $5 Local $4
+    /writeini clans\ $+ $5 $+ .ini $5 Lider $nick
+    /writeini clans\ $+ $5 $+ .ini $5 SubLider Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Vitorias 0
+    /writeini clans\ $+ $5 $+ .ini $5 Derrotas 0
+    /writeini clans\ $+ $5 $+ .ini $5 Jogos 0
+    /writeini clans\ $+ $5 $+ .ini $5 Integrantes 1
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiros $nick
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiro1 Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiro2 Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiro3 Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiro4 Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Cavaleiro5 Ninguem
+    /writeini clans\ $+ $5 $+ .ini $5 Pontos 0
+    /writeini cadastros\ $+ $nick $+ .ini $nick Clan $5
+    /writeini cadastros\ $+ $nick $+ .ini $nick Cargo Líder
+    /msg =$nick 2(14 Clan Criado com Sucesso2! )
+    /msg =$nick 2(14 Status 7»2 Nome:14 $5 7»2 Senha:14 $3 7»2 Local:14 $4 7»2 Lider:14 $nick 2)
+  }
+}
+
+
+on *:chat:.Status: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    if ( $readini(clans\ $+ %clan $+ .ini,%clan,fechado) == Sim ) {
+    /msg =$nick 2(14 O Clan2: %clan 14Está fechado 2) | halt }
+    /msg =$nick 2(14 Dados Do clan2 %clan $+ : 2)
+    /msg =$nick 2(14 Nome2: $readini(clans\ $+ %clan $+ .ini,%clan,nome) 2)
+    /msg =$nick 2(14 Local2: $readini(clans\ $+ %clan $+ .ini,%clan,Local) 2)
+    /msg =$nick 2(14 Líder2: $readini(clans\ $+ %clan $+ .ini,%clan,lider) 2)
+    /msg =$nick 2(14 SubLíder2: $readini(clans\ $+ %clan $+ .ini,%clan,Sublider) 2)
+    /msg =$nick 2(14 Integrantes2: $readini(clans\ $+ %clan $+ .ini,%clan,integrantes) 2)
+    /msg =$nick 2(14 Vitorias2: $readini(clans\ $+ %clan $+ .ini,%clan,vitorias) 2)
+    /msg =$nick 2(14 Derrotas2: $readini(clans\ $+ %clan $+ .ini,%clan,derrotas) 2)
+    /msg =$nick 2(14 Jogos2: $readini(clans\ $+ %clan $+ .ini,%clan,jogos) 2)
+    /msg =$nick 2(14 Pontos2: $readini(clans\ $+ %clan $+ .ini,%clan,Pontos) 2)
+    /msg =$nick 2(14 Cavaleiro 12: $readini(clans\ $+ %clan $+ .ini,%clan,cavaleiro1) 2)
+    /msg =$nick 2(14 Cavaleiro 22: $readini(clans\ $+ %clan $+ .ini,%clan,cavaleiro2) 2)
+    /msg =$nick 2(14 Cavaleiro 32: $readini(clans\ $+ %clan $+ .ini,%clan,cavaleiro3) 2)
+    /msg =$nick 2(14 Cavaleiro 42: $readini(clans\ $+ %clan $+ .ini,%clan,cavaleiro4) 2)
+    /msg =$nick 2(14 Cavaleiro 52: $readini(clans\ $+ %clan $+ .ini,%clan,cavaleiro5) 2)
+}
+}
+
+on *:chat:.Status*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(clans.ini,$2,nome) == $null ) {
+    /msg =$nick 2(4 ERRO:14 o Clan2 $2 14não existe 2) | halt }
+    /msg =$nick 2(14 Dados Do clan2 $2 $+ : 2)
+    /msg =$nick 2(14 Nome2: $readini(clans\ $+ $2 $+ .ini,$2,nome) 2)
+    /msg =$nick 2(14 Local2: $readini(clans\ $+ $2 $+ .ini,$2,Local) 2)
+    /msg =$nick 2(14 Líder2: $readini(clans\ $+ $2 $+ .ini,$2,lider) 2)
+    /msg =$nick 2(14 SubLíder2: $readini(clans\ $+ $2 $+ .ini,$2,Sublider) 2)
+    /msg =$nick 2(14 Integrantes2: $readini(clans\ $+ $2 $+ .ini,$2,integrantes) 2)
+    /msg =$nick 2(14 Vitorias2: $readini(clans\ $+ $2 $+ .ini,$2,vitorias) 2)
+    /msg =$nick 2(14 Derrotas2: $readini(clans\ $+ $2 $+ .ini,$2,derrotas) 2)
+    /msg =$nick 2(14 Jogos2: $readini(clans\ $+ $2 $+ .ini,$2,jogos) 2)
+    /msg =$nick 2(14 Pontos2: $readini(clans\ $+ $2 $+ .ini,$2,Pontos) 2)
+    /msg =$nick 2(14 Cavaleiro 12: $readini(clans\ $+ $2 $+ .ini,$2,cavaleiro1) 2)
+    /msg =$nick 2(14 Cavaleiro 22: $readini(clans\ $+ $2 $+ .ini,$2,cavaleiro2) 2)
+    /msg =$nick 2(14 Cavaleiro 32: $readini(clans\ $+ $2 $+ .ini,$2,cavaleiro3) 2)
+    /msg =$nick 2(14 Cavaleiro 42: $readini(clans\ $+ $2 $+ .ini,$2,cavaleiro4) 2)
+    /msg =$nick 2(14 Cavaleiro 52: $readini(clans\ $+ $2 $+ .ini,$2,cavaleiro5) 2)
+   }
+}
+
+on *:chat:.Adicionar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$3 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if !$4 { /msg =$nick 2(14 Comando Inválido 2) | halt }
+    if ( $4 != Cavaleiro ) && ( $4 != SubLider ) { /msg =$nick 2(4 ERRO:14 Os cargos Disponíveis são 2Cavaleiro14 e 2SubLider ) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    if ( $readini(cadastros.ini,$2,nick) == $null ) {
+    /msg =$nick 2(4 ERRO:2 $2 14não está cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,id) == 0 ) {
+    /msg =$nick 2(4 ERRO:2 $2 14não está identificado 2) | halt }
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,lider) != $nick ) {
+    /msg =$nick 2(4 ERRO:14 Você não é o lider deste Clan 2) | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,clan) != nenhum ) {
+    /msg =$nick 2(4 ERRO:2 $2 14já está em um clan 2) | halt }
+    if ( $4 == SubLider ) && $readini(clans\ $+ $3 $+ .ini,$3,SubLider) ) != Ninguem ) { 
+    /msg =$nick 2(4 ERRO:14 O Clan2 $3 14Já possui um SubLider 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,integrantes) >= 6 ) {
+    /msg =$nick 2(4 ERRO:14 o Clan2 $3 14já está cheio2,14 Limite de2 7 14integrantes 2) | halt }
+    if ( $4 == SubLider ) { /writeini clans\ $+ $3 $+ .ini $3 Sublider $2 | /writeini clans\ $+ $3 $+ .ini $3 Cavaleiros $readini(clans\ $+ $3 $+ .ini,$3,cavaleiros) $+ , $2 }
+    if ( $4 == Cavaleiro ) { /writeini clans\ $+ $3 $+ .ini $3 Cavaleiros $readini(clans\ $+ $3 $+ .ini,$3,cavaleiros) $+ , $2 }
+    /writeini clans\ $+ $3 $+ .ini $3 integrantes $calc( $readini(clans\ $+ $3 $+ .ini,$3,integrantes) + 1 )
+    /msg =$nick 2(14 Cavaleiro2 $2 14adicionado no Clan2: $3 2)
+    /writeini cadastros\ $+ $2 $+ .ini $2 Clan $3
+    /writeini cadastros\ $+ $2 $+ .ini $2 Cargo $4
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,cavaleiro1) == Ninguem ) {
+    /writeini clans\ $+ $3 $+ .ini $3 cavaleiro1 $2
+    /writeini cadastros\ $+ $2 $+ .ini $2 TipoCav Cavaleiro1
+    /msg = $+ $2 2(14 Você foi adicionado no clan2 $3 14por2 $nick 14Como2 $4 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,cavaleiro2) == Ninguem ) {
+    /writeini clans\ $+ $3 $+ .ini $3 cavaleiro2 $2
+    /writeini cadastros\ $+ $2 $+ .ini $2 TipoCav Cavaleiro2
+    /msg = $+ $2 2(14 Você foi adicionado no clan2 $3 14por2 $nick 14Como2 $4 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,cavaleiro3) == Ninguem ) {
+    /writeini clans\ $+ $3 $+ .ini $3 cavaleiro3 $2 
+    /writeini cadastros\ $+ $2 $+ .ini $2 TipoCav Cavaleiro3
+    /msg = $+ $2 2(14 Você foi adicionado no clan2 $3 14por2 $nick 14Como2 $4 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,cavaleiro4) == Ninguem ) {
+    /writeini clans\ $+ $3 $+ .ini $3 cavaleiro4 $2 
+    /writeini cadastros\ $+ $2 $+ .ini $2 TipoCav Cavaleiro4
+    /msg = $+ $2 2(14 Você foi adicionado no clan2 $3 14por2 $nick 14Como2 $4 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,cavaleiro5) == Ninguem ) {
+    /writeini clans\ $+ $3 $+ .ini $3 cavaleiro5 $2
+    /writeini cadastros\ $+ $2 $+ .ini $2 TipoCav Cavaleiro5
+    /msg = $+ $2 2(14 Você foi adicionado no clan2 $3 14por2 $nick 14Como2 $4 2) | halt }
+  }
+}
+
+on *:chat:.Fechar Clan*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(clans.ini,$3,nome) == $null ) {
+    /msg =$nick 2(4 ERRO:14 o Clan2 $3 14não existe 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,senha) != $4 ) {
+    /msg =$nick 2(4 ERRO:14 A senha está errada 2) | halt }
+    if ( $readini(clans\ $+ $3 $+ .ini,$3,senha) == $4 ) {
+    /writeini cadastros\ $+ $nick $+ .ini $nick Clan Nenhum
+    /writeini cadastros\ $+ $nick $+ .ini $nick Cargo N/A
+    /writeini clans\ $+ $3 $+ .ini $3 Fechado Sim
+    /msg =$nick 2(14 Clan2 $3 14Fechado com Sucesso 2)
+    }
+  }
+}
+
+on *:chat:.Sair Clan: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,clan) == nenhum ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui um Clan 2) | halt }
+    /set %clan $readini(cadastros\ $+ $nick $+ .ini,$nick,clan)
+    /set %tipo $readini(cadastros\ $+ $nick $+ .ini,$nick,tipoCav)
+    /writeini cadastros\ $+ $nick $+ .ini $nick Clan Nenhum
+    /writeini cadastros\ $+ $nick $+ .ini $nick Cargo N/A
+    /writeini clans\ $+ %clan $+ .ini %clan %tipo Ninguem
+    /msg =$nick 2(14 Você saiu do Clan2: %clan )
+  }
+}
+    
+on *:chat:.Proposta*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(clans.ini,$2,nome) == $null ) {
+    /msg =$nick 2(4 ERRO:14 o Clan2 $2 14não existe 2) | halt }
+    /set %lider $readini(clans\ $+ $2 $+ .ini,$2,lider)
+    if ( $readini(clans\ $+ $2 $+ .ini,$2,fechado) == Sim ) {
+    /msg =$nick 2(4 ERRO:14 o Clan2 $2 14Está fechado 2) | halt }
+    if ( $readini(cadastros\ $+ %lider $+ .ini,%lider,id) == 0 ) {
+    /msg =$nick 2(14 Não é possivel fazer a proposta para esse clan 2)
+    /msg =$nick 2(14 O lider dele nao está identificado 2)
+    /msg =$nick 2(14 Detectando Lider2: %lider 2) | halt }
+    /msg = $+ %lider 2( $nick 14Está enviando uma proposta Para entrar sem seu clan2: )
+    /msg = $+ %lider 2(14 Para adiciona-lo ao seu clan2,14 Digite2: .14Adicionar2 $nick <14clan2> <14Cargo2> )
+  }
+}
+   
+on *:chat:.Total cadastrados: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+  /set %clans $ini(clans.ini,0)
+  /set %cac 1
+  /msg =$nick 2(14 Os Clans Cadastrados são2: )
+   while ( %clans >= %cac ) {
+    /msg =$nick 2(14 %cac 2- $ini(clans.ini,%cac) 2)
+    inc %cac
+  }
+  /msg =$nick 2(14Total de2: $ini(clans.ini,0) 14Clans cadastrados 2)
+}
+}

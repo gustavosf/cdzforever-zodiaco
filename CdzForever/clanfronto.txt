@@ -1,0 +1,95 @@
+
+off *:chat:.Clanfronto*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick Você não está Cadastrado | halt }
+    if ( $readini(clanf.ini,$nick,id) == $null ) {
+      /msg =$nick Você não esta na sala
+      /msg =$nick Digite .Entrar Clanfronto
+      .halt
+    }
+    if ( $readini(clanf.ini,$nick,id) == 2 ) { 
+    if !$2 { /msg =$nick Comando Inválido | halt }
+    if !$3 { /msg =$nick Comando Inválido | halt }
+    if ( $readini(clans.ini,$2,nome) == $Null ) {
+    /msg =$nick ERRO: o Clan $2 não existe | halt }
+    if ( $readini(clans.ini,$3,nome) == $Null ) {
+    /msg =$nick ERRO: o Clan $3 não existe | halt }
+    /set %lider1 $readini(clans\ $+ $2 $+ .ini,$2,lider)
+    /set %lider2 $readini(clans\ $+ $3 $+ .ini,$3,lider)
+    /set %opennum 1
+    while (%opennum <= $chat(0)) {
+    if ($readini(clanf.ini,$chat(%opennum),id) = 2 )  {
+    /writeini clanfronto.ini $2 contra $3
+    /writeini clanfronto.ini $3 contra $2
+    /msg = $+ $chat(%opennum) Clanfronto Entre os Clans: $2 Vs $3
+    /msg = $+ $chat(%opennum) Jogadores do Clan $2 $+ : $readini(clans\ $+ $2 $+ .ini,$2,Cavaleiros)
+    /msg = $+ $chat(%opennum) Jogadores do Clan $3 $+ : $readini(clans\ $+ $3 $+ .ini,$3,Cavaleiros)
+    /msg = $+ $chat(%opennum) %lider1 Escolha 2 integrantes do seu Clan, Digitando: .Escolher <nick1> <nick2> <clan>
+    /msg = $+ $chat(%opennum) %lider2 Escolha 2 integrantes do seu Clan, Digitando: .Escolher <nick1> <nick2> <clan>
+     }
+     inc %opennum
+     }
+     .halt
+   }
+}
+
+off *:chat:.Escolher*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick Você não está Cadastrado | halt }
+    if ( $readini(clanf.ini,$nick,id) == $null ) {
+      /msg =$nick Você não esta na sala
+      /msg =$nick Digite .Entrar Clanfronto
+      .halt
+    }
+    if ( $readini(clanf.ini,$nick,id) == 2 ) {  
+    if ( $readini(clans\ $+ $4 $+ .ini,$4,lider ) != $nick ) {
+    /msg =$nick ERRO: Você não é o lider deste Clan | halt }  
+    if ( $readini(clans.ini,$4,nome) == $Null ) {
+    /msg =$nick ERRO: o Clan $4 não existe | halt }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,clan) != $4 ) {
+    /msg =$nick ERRO: $2 não é do clan $4 | halt }
+    if ( $readini(cadastros\ $+ $3 $+ .ini,$3,clan) != $4 ) {
+    /msg =$nick ERRO: $3 não é do clan $4 | halt }
+    if ( $readini(cadastros.ini,$2,nick) == $null ) {
+    /msg =$nick ERRO: $2 não está cadastrado | halt }
+    if ( $readini(cadastros.ini,$3,nick) == $null ) {
+    /msg =$nick ERRO: $3 não está cadastrado | halt }
+    /writeini clanfronto.ini $4 cavaleiro1 $2
+    /writeini clanfronto.ini $4 cavaleiro2 $3
+    /set %opennum 1
+    while (%opennum <= $chat(0)) {
+    if ($readini(clanf.ini,$chat(%opennum),id) = 2 )  {
+    /writeini clanfronto.ini $4 cavaleiro1 $2
+    /writeini autoluta\ $+ $2 $+ .ini $2 lutando clanf
+    /writeini autoluta\ $+ $2 $+ .ini $2 hp $readini cadastros\ $+ $2 $+ .ini $2 Hp
+    /writeini autoluta\ $+ $2 $+ .ini $2 ataque $readini cadastros\ $+ $2 $+ .ini $2 ataque
+    /writeini autoluta\ $+ $2 $+ .ini $2 defesa $readini cadastros\ $+ $2 $+ .ini $2 defesa
+    /writeini autoluta\ $+ $2 $+ .ini $2 agilidade $readini cadastros\ $+ $2 $+ .ini $2 Agilidade
+    /writeini autoluta\ $+ $2 $+ .ini $2 hpmax $readini cadastros\ $+ $2 $+ .ini $2 hpmax
+    /writeini autoluta\ $+ $2 $+ .ini $2 mp $readini cadastros\ $+ $2 $+ .ini $2 mp
+    /writeini autoluta\ $+ $2 $+ .ini $2 mpmax $readini cadastros\ $+ $2 $+ .ini $2 mpmax
+    /writeini autoluta\ $+ $3 $+ .ini $3 lutando clanf
+    /writeini autoluta\ $+ $3 $+ .ini $3 hp $readini cadastros\ $+ $3 $+ .ini $3 Hp
+    /writeini autoluta\ $+ $3 $+ .ini $3 ataque $readini cadastros\ $+ $3 $+ .ini $3 ataque
+    /writeini autoluta\ $+ $3 $+ .ini $3 defesa $readini cadastros\ $+ $3 $+ .ini $3 defesa
+    /writeini autoluta\ $+ $3 $+ .ini $3 agilidade $readini cadastros\ $+ $3 $+ .ini $3 Agilidade
+    /writeini autoluta\ $+ $3 $+ .ini $3 hpmax $readini cadastros\ $+ $3 $+ .ini $3 hpmax
+    /writeini autoluta\ $+ $3 $+ .ini $3 mp $readini cadastros\ $+ $3 $+ .ini $3 mp
+    /writeini autoluta\ $+ $3 $+ .ini $3 mpmax $readini cadastros\ $+ $3 $+ .ini $3 mpmax
+    /writeini Clanfronto.ini $2 Vez sim
+    /writeini clanfronto.ini $4 cavaleiro2 $3
+    /writeini $4 $+ .ini Cavaleiros $2 $2
+    /writeini $4 $+ .ini Cavaleiros $3 $3
+  /set %clan2 $readini(clanfronto.ini,$4,Contra)
+  if ( $readini(clanfronto.ini,%clan2,cavaleiro2) == $null ) {
+    /msg = $+ $chat(%opennum) $nick Escolheu os cavaleiros $2 e $3  para o CLan $4
+    /msg = $+ $chat(%opennum) Seu Clan começa atacando com: $2 $+ , Digite: .Atacar <nick> <ataque>  }
+  if ( $readini(clanfronto.ini,%clan2,cavaleiro2) != $null ) {
+    /msg = $+ $chat(%opennum) $nick Escolheu os cavaleiros $2 e $3 para o Clan $4
+    /msg = $+ $chat(%opennum) Clan $4 aguarde o Ataque do clan adversário }
+     }
+     inc %opennum
+     }
+     .halt
+   }
+}

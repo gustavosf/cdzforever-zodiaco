@@ -1,0 +1,96 @@
+Clan:
+
+.Abrir Clan -> abre um clan ... dinheiro necessário 1.000.000
+.Clans -> Para ver os clans.
+Exemplo:
+.clans
+Clans Existentes:
+
+(0) - Evil Empire - Membros: 12 Poder: 131 Preço: 20.000
+(1) - Slayers     - Membros: 5  Poder: 98  Preço: 10.000
+
+Ou seja: Membros = qtidade de players no clan. Poder = Soma do lvl de cada membro do clan
+Preço = qtidade de grana q vc tem d pagar p/ entrar no clan.
+
+.Status -> ver o status do seu clan
+(No kso do EvilMaster ser o Líder do Evil Empire:)
+.Status
+Informações do Clan <<Evil Empire>>:
+Cargos      : 7
+Títulos     : Iniciante; Comandante; Cavaleiro; Capitão; Lenda; Conselheiro; Rei;
+Membros     : 12
+Poder       : 131
+Tesouro     : 256.354
+Custo Paz   : 100.000
+Magia ?     : Não
+Equip ?     : Não
+Privilégios :
+     Adicionar : 6
+     Remover   : 7
+     Promover  : 6
+     Diminuir  : 6
+     Retirar   : 7
+     Set       : 6
+
+Este Clan Não está em Guerra. (OU) Este Clan está em Guerra com Slayers.
+Preço: 20.000
+Level Mínimo: 10
+>> Guerra Status:
+Mortos : 2
+Mortes : 15
+Guerras Rejeitadas : 0
+Guerras Declaradas : 1
+Guerras Vitoriosas : 1
+Guerras Perdidas   : 0
+	
+Bem, explicando coisas no Status:
+Cargos -> Quantidade de Cargos de um clan, neste kso 7 (Inicial 5 para adicionar 1 cargo a mais = 80.000)
+Títulos -> São os Próprios casos que apareceram no .users o que indica cada membro ... por exemplo o Unl0ad_ eh a Lenda do Evil Empire. Os titulos tem exatamente a quantidade dos Ranks.
+Membros -> Quantidade de membros.
+Poder -> Soma do lvl dos membros.
+Custo Paz -> Quantidade para Acabar com a guerra contra este clan.
+Magia ? -> Se o clan tem uma magia especifica (Para criar uma magia necessita de 5.000.000) e flar com um Admin.
+Equip ? -> Criar um equipamento pra pessoas do clan ... (max de equipamentos permitidos: 2) Um equipamento custa 2.500.000 e tem de clar com um Admin.
+Privilégios 
+São coisas que o dono do clan e seus membros podem fazer ... ali no Privilégios, aparecem números do lado ... esses números são o NIVEL (EM RANK) necessário para ter determinado privilégio. Por exemplo um conselheiro
+tem esses privilégios: Adicionar, Promover, Diminuir e Set (pois ele eh o Rank 6: Conselheiro).
+Explicando os Privilégios:
+Adicionar <nick>: Adicionar alguem que esta efetuando um pedido no clan.
+Remover <nick>: Retira uma pessoa do clan.
+Promover <nick>: Aumenta um rank de uma pessoa do clan (Não pode aumentar alguem no mesmo rank que o seu)
+Diminuir <nick>: Diminui um rank de uma pessoa do clan (Não pode diminuir alguem no mesmo rank que o seu)
+Retirar <quantia>: Retira uma quantidade de dinheiro do clan
+Set: Existem subdivisões no comando set:
+Set CP -> Coloca a quantidade do Custo de Paz.
+Set EnLvl -> Determina o Level Mínimo para entrar no clan.
+Set Preço -> Determina o valor do Preço.
+Set Rank <nº> -> Muda determinado Rank (Máximo de digitos que um rank pode ter: 11)
+Set Priv <Privilégio> <rank> -> Para Deixar determinado privilégio com determinado Rank.
+
+Preço: Quantia para vc entrar num clan.
+Level Mínimo: Lvl minimo para entrar no clan
+Mortos: Quantidade de mortos para o cara de outro clan (NUMA GUERRA)
+Mortes: Quantidades de mortes do outro clan (NUMA GUERRA)
+PS: Isso vai aglutinando ... digamos q a primeira guerra foi : 2 / 6 (respectivamente) e na 2 ... eles deram uma surra em um 3º clan e ficou 3 / 30 =P.
+Guerras Fugidas: Quando se nega um pedido de uma guerra conta como 1 ai.
+Guerras Declaradas: Quando se declara uma Guerra.
+Guerras Vitoriosas: Quando vence uma Guerra.
+Guerras Perdidas: Quando se perde uma Guerra.
+
+no .users aparece:
+
+EvilMaster [Rei do Evil Empire] Nível: 12
+Unl0ad_ [Conselheiro do Evil Empire] Nível: 17
+Kdett [Borboletinha do Viados Clan] Nível: 7
+Hyoga_di_Cisne [Candidato do Evil Empire] Nível 10 <<<< ISSO AQUI EH QUANDO O CARA DIGITA .proposta <clan> (QUANDO ELE DIGITA ISSO, AUTOMATICAMENTE, ELE PERDE A QUANTIDA "PREÇO" DE DINHEIRO E ESTA VAI PARA O TESOURO DO CLAN)
+aí ele so vira o primeiro RANK do clan quando o líder, ou alguem que tenha o privilégio Adicionar de .adicionar <nick> emtão o titulo dele muda para [Rank1 do Clan]
+
+.Clan users
+Comando para ver QUEM do SEU CLAN está online.
+.clan users
+Unl0ad_
+EvilMaster
+Jochim
+
+.Sair Clan -> Comando para sair do clan.
+.Fechar Clan -> COMANDO DO LÍDER para fechar um CLAN (Precisa da Senha)

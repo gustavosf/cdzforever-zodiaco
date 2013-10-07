@@ -1,0 +1,124 @@
+alias stats {
+  var %bar = $int($calc($1 / $2 * 10))
+  if ((%bar < 1) && (%bar > 0)) { inc %bar }
+  return $str(2ê,%bar) $+ $str(15ê,$int($calc(($2 - $1) / $2 * 10)))
+}
+
+on *:chat:.ataque*: {
+  .set %oponente $readini autoluta\ $+ $nick $+ .ini $nick oponente
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 VocÍ n„o est· Cadastrado 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+      /msg =$nick 2(14 VocÍ n„o esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+      /msg =$nick 2(14 VocÍ n„o esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+      .halt
+    }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+        /msg =$nick 2(4 ERRO:14 VocÍ n„o est· lutando 2)
+        .halt
+      }
+      if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+  if ( $readini autoluta\ $+ $nick $+ .ini $nick vez != $null ) {
+    /msg =$nick 2(4 ERRO:14 n„o est· no seu turno 2)
+  }
+  if ( $readini autoluta\ $+ $nick $+ .ini $nick vez == $null ) {
+  if ( $readini autoluta\ $+ $nick $+ .ini $nick vez != $null ) { /msg =$nick 2(4 ERRO:14 N„o est· em seu turno de Ataque 2) | halt }
+  if ($readini golpes\ $+ $nick $+ .ini $nick $2 == $null ) { /msg =$nick 2(4 ERRO:14 VocÍ n„o possui o golpe2: $2 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nivel) < $readini(golpeataque.ini,Golpes,$2) ) { /msg =$nick 2(4 ERRO:14 VocÍ sÛ pode usar2 $2 14no nivel2 $readini(golpeataque.ini,Golpes,$2) ) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,mp) <  $readini(golpes.ini,golpes,$2) ) { /msg =$nick 2(4 ERRO:14 VocÍ n„o tem2 Mp 14suficiente 2) | halt }
+  /timer $+ autoluta $+ 1 $+ $nick off
+  /timer $+ autoluta $+ 2 $+ $nick off
+  /timer $+ autoluta $+ 3 $+ $nick off
+  /timer $+ autoluta $+ 4 $+ $nick off
+  /timer $+ autoluta $+ 5 $+ $nick off
+  /timer $+ autoluta $+ 6 $+ $nick off
+  /timer $+ autoluta $+ 7 $+ $nick off
+  /timer $+ autoluta $+ 8 $+ $nick off
+  /timer $+ autoluta $+ 9 $+ $nick off
+  /timer $+ ataque $+ 1 $+ $nick off
+  /timer $+ ataque $+ 2 $+ $nick off
+  /timer $+ ataque $+ 3 $+ $nick off
+  /timer $+ ataque $+ 4 $+ $nick off
+  /timer $+ ataque $+ 5 $+ $nick off
+  /timer $+ ataque $+ 6 $+ $nick off
+  /timer $+ ataque $+ 7 $+ $nick off
+  /timer $+ ataque $+ 8 $+ $nick off
+  /timer $+ ataque $+ 9 $+ $nick off
+  /timer $+ ataque $+ 10 $+ $nick off
+  /timer $+ ataque $+ 11 $+ $nick off
+  /set %falhou $rand(1,8)
+  if (%falhou = 1) {  
+  msg =$nick 2(14 VocÍ 2Falhou14 o Golpe 2)
+  msg =$nick 2( $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) 14Hp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick Hp 2/14 $readini autoluta\ $+ $nick $+ .ini $nick Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick mp 2/14 $readini autoluta\ $+ $nick $+ .ini $Nick mpmax 2)
+  msg =$nick 2( %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) 14Hp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2) 
+  msg = $+ %oponente 2( $nick 14Falhou o Golpe2: $2 )
+  msg = $+ %oponente 2( $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) 14Hp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick Hp 2/14 $readini autoluta\ $+ $nick $+ .ini $nick Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick mp 2/14 $readini autoluta\ $+ $nick $+ .ini $Nick mpmax 2)
+  msg = $+ %oponente 2( %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) 14Hp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2)  
+  /writeini autoluta\ $+ $nick $+ .ini $nick vez vez
+  msg =$nick 2(14 Aguarde2,14 Turno de2 %oponente )
+  msg = $+ %oponente 2(14 Seu Turno de Ataque2,14 Digite2: .14Ataque 2<14ataque2> )
+  .remini autoluta\ $+ %oponente $+ .ini %oponente vez | halt }
+  /set %ataque $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,ataque) + $readini(danoGolpe.ini,Golpes,$2) )
+  /set %defesa $calc( $readini(cadastros\ $+ %oponente $+ .ini,%oponente,defesa) + $readini(cadastros\ $+ %oponente $+ .ini,%oponente,nivel))
+  /set %rand1 $calc( %ataque - %defesa ) 
+  /set %rand $rand( %ataque,%rand1 )
+  if ( %ataque < %defesa ) { /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $calc( $readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp) - 1 ) }
+  if ( %rand > 1 ) { /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $calc($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp) - %rand ) }
+  /writeini Autoluta\ $+ $nick $+ .ini $nick Mp $calc( $readini(autoluta\ $+ $nick $+ .ini,$nick,mpmax) - $readini(golpes.ini,golpes,$2) )
+  /set %menor $readini autoluta\ $+ %oponente $+ .ini %oponente hp
+  msg =$nick 2(14 VocÍ Atacou com2: $2 )
+  if ( %ataque < %defesa  ) { /msg =$nick 2(14 VocÍ tirou2 1 14Do Hp de2 %oponente ) }
+  if ( %rand > 1 ) { /msg =$nick 2(14 VocÍ tirou2 %rand 14Do Hp de2 %oponente ) }
+  msg = $+ %oponente 2( $nick 14Atacou com2: $2 )
+  if ( %ataque < %defesa  ) { /msg = $+ %oponente 2( $nick 14Tirou2 1 14do seu Hp 2) }
+  if ( %rand > 1 ) { /msg = $+ %oponente 2( $nick 14Tirou2 %rand 14do seu Hp 2) }
+  msg =$nick 2( $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) 14Hp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick Hp 2/14 $readini autoluta\ $+ $nick $+ .ini $nick Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick mp 2/14 $readini autoluta\ $+ $nick $+ .ini $Nick mpmax 2)
+ if (%menor <= 0 ) { 
+   msg =$nick 2( %oponente 15 14Hp2:14 0 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2)
+   msg = $+ %oponente 2( %oponente 15 14Hp2:14 0 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2)
+   msg = $+ %oponente 2( $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) 14Hp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick Hp 2/14 $readini autoluta\ $+ $nick $+ .ini $nick Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick mp 2/14 $readini autoluta\ $+ $nick $+ .ini $Nick mpmax 2)
+  /msg =$nick 2(14 VocÍ Derrotou2 %oponente )
+  /writeini cadastros\ $+ $nick $+ .ini $nick hp $readini Autoluta\ $+ $nick $+ .ini $nick hp
+  /set %perdedor %oponente
+  /msg = $+ %oponente 2(14 VocÍ foi Derrotado por2 $nick )
+  /set %ganhador $nick 
+  /writeini cadastros\ $+ %oponente $+ .ini %perdedor hp 0 
+  /writeini cadastros\ $+ %oponente $+ .ini %oponente mp $readini(autoluta\ $+ %perdedor $+ .ini,%perdedor,Mp)
+  /writeini cadastros\ $+ %ganhador $+ .ini %ganhador mp $readini(autoluta\ $+ %ganhador $+ .ini,%ganhador,Mp)
+  /fimguerra 
+  /remini Autoluta\ $+ %oponente $+ .ini %oponente
+  /writeini Autoluta\ $+ %oponente $+ .ini %oponente lutando nao 
+  /remini Autoluta\ $+ $nick $+ .ini $nick
+  /writeini Autoluta\ $+ $nick $+ .ini $nick lutando nao 
+  /set %opennum 1
+  while (%opennum <= $chat(0)) {
+  /set %nick $chat(%opennum)
+  if ( %nick != $nick) { 
+  /msg = $+ %nick 2( %ganhador 14Ganhou de2 %perdedor )
+  }
+  inc %opennum
+ }
+ .halt }
+  msg =$nick 2( %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) 14Hp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2) 
+  /timer $+ ataque $+ 1 $+ %oponente 1 120 /msg =$nick 2(14 Acabou o Tempo vocÍ ganhou de2: %oponente )
+  /timer $+ ataque $+ 2 $+ %oponente 1 120 /msg = $+ %oponente 2(14 Acabou o Tempo vocÍ perdeu para2 $nick )
+  /timer $+ ataque $+ 3 $+ %oponente 1 120 /set %perdedor %oponente
+  /timer $+ ataque $+ 4 $+ %oponente 1 120 /writeini cadastros\ $+ $nick $+ .ini $nick hp $readini autoluta\ $+ $nick $+ .ini $nick hp 
+  /timer $+ ataque $+ 5 $+ %oponente 1 120 /writeini cadastros\ $+ %perdedor $+ .ini %perdedor hp 0
+  /timer $+ ataque $+ 6 $+ %oponente 1 120 /set %ganhador $nick 
+  /timer $+ ataque $+ 7 $+ %oponente 1 120 /fimguerra
+  /timer $+ ataque $+ 8 $+ %oponente 1 120 /remini autoluta\ $+ %oponente $+ .ini %oponente
+  /timer $+ ataque $+ 9 $+ %oponente 1 120 /writeini autoluta\ $+ %oponente $+ .ini %oponente lutando nao
+  /timer $+ ataque $+ 10 $+ %oponente 1 120 /remini autoluta\ $+ $nick $+ .ini $nick
+  /timer $+ ataque $+ 11 $+ %oponente 1 120 /writeini autoluta\ $+ $nick $+ .ini $nick lutando nao
+  /remini autoluta\ $+ %oponente $+ .ini %oponente vez
+  /writeini autoluta\ $+ $nick $+ .ini $nick vez vez
+ if ($readini autoluta.ini %oponente hp <= 0 ) { msg =$nick 2( %oponente 15 14Hp2:14 0 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2) | msg = $+ %oponente 2( %oponente 15 14Hp2:14 0 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2) | halt }
+  msg = $+ %oponente 2( %oponente $stats($readini(autoluta\ $+ %oponente $+ .ini,%oponente,hp),$readini(autoluta\ $+ %oponente $+ .ini,%oponente,hpmax)) 14Hp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ %oponente $+ .ini %oponente mp 2/14 $readini autoluta\ $+ %oponente $+ .ini %oponente mpmax 2) 
+  msg = $+ %oponente 2( $nick $stats($readini(autoluta\ $+ $nick $+ .ini,$nick,hp),$readini(autoluta\ $+ $nick $+ .ini,$nick,hpmax)) 14Hp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick Hp 2/14 $readini autoluta\ $+ $nick $+ .ini $nick Hpmax 7ª14 Mp2:14 $readini autoluta\ $+ $nick $+ .ini $Nick mp 2/14 $readini autoluta\ $+ $nick $+ .ini $Nick mpmax 2)
+  if ($readini(autoluta\ $+ %oponente $+ .ini,%oponente,Hp) > 0 ) { msg =$nick 2(14 Aguarde2,14 Turno de2 %oponente ) | msg = $+ %oponente 2(14 Seu Turno de Ataque2,14 Digite2: .14Ataque 2<14ataque2> ) |  /msg =$nick 0,0______________________________________  | /msg = $+ %oponente 0,0______________________________________  |  halt }  
+}

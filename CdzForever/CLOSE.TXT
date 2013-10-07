@@ -1,0 +1,22 @@
+on *:close:=: {
+  if ( $readini(cadastros\ $+ $Nick $+ .ini,$nick,nick) != $null ) { 
+    /close -c $nick
+    /writeini cadastros\ $+ $nick $+ .ini $nick id 0  
+    /remini autoluta\ $+ $nick $+ .ini $nick desafio 
+    /writeini autoluta\ $+ $nick $+ .ini $nick lutando nao
+    /remini autoluta\ $+ $nick $+ .ini $nick Reaçao
+    /remini autoluta\ $+ $nick $+ .ini $nick Elevou
+    /remini autoluta\ $+ $nick $+ .ini $nick vez
+    /remini op.ini $nick 
+    /remini admin.ini $nick
+    /remini listando.ini $nick
+    /close -c $nick 
+  }
+     /set %opennum 1
+     while (%opennum <= $chat(0)) {
+     if ($chat(%opennum) != $nick) { 
+     /msg = $+ $chat(%opennum) 2(  $+ $nick $+ 14 Saiu do 2CdzForever14 Chat2. ) 
+        }
+        inc %opennum
+      }
+}

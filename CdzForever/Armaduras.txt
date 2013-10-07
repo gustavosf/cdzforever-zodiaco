@@ -1,0 +1,619 @@
+on *:chat:.Armaduras: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 14,2(0 Sistema de Armaduras: 14)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Armaduras podem ser dividida em duas partes2, A14 ou 2B. )
+    /msg =$nick 2( A 7»14 Armaduras únicas2,14 só estará disponível se nao tiver nenhum Dono 2)
+    /msg =$nick 2(14 Em caso de Troca deverão ser setadas por um 2OPERADOR )
+    /msg =$nick 2( B 7»14 Armaduras copias2,14 são mais fracas que as originais e são 2ILIMITADAS )
+    /msg =$nick 2(14 Qualquer jogador pode ter2. )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 14,2( 0Comandos: 14)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2( .Bronze 7» 2.Aço 7» 2.Prata 7» 2.Ouro 7» 2.Sapúris 7» 2.Kamei 7» 2.Deuses 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 2(14 Para Trocar de Armadura2,14 Digite2: .2Trocar 2)
+    /msg =$nick 2(14 Total de2 $ini(armaduras.ini,0) 14Armaduras2. )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.bronze: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armadura de Bronze:14 São Armaduras Sagradas2,14 extremamente resistente e rápidas2. ) 
+    /msg =$nick 2( 2Requer:14 Level2 5 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 2.000 14ao seu dono e uma Resistência de2 150 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 4.000 14ao seu dono e uma Resistência de2 300 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2( R 7»2 Pegasus 7»14 $readini(armaduras.ini,pegasus,Dono) 2)
+    /msg =$nick 2( N 7»2 Cisne 7»14 $readini(armaduras.ini,Cisne,Dono) 2)
+    /msg =$nick 2( N 7»2 Dragão 7»14 $readini(armaduras.ini,Dragão,Dono) 2)
+    /msg =$nick 2( C 7»2 Andromeda 7»14 $readini(armaduras.ini,Andromeda,Dono) 2)
+    /msg =$nick 2( O 7»2 Fênix 7»14 $readini(armaduras.ini,Fênix,Dono) 2)
+    /msg =$nick 2( K 7»2 Hidra 7»14 $readini(armaduras.ini,Hidra,Dono) 2)
+    /msg =$nick 2( L 7»2 Urso 7»14 $readini(armaduras.ini,Urso,Dono) 2)
+    /msg =$nick 2( L 7»2 Unicórnio 7»14 $readini(armaduras.ini,Unicórnio,Dono) 2)
+    /msg =$nick 2( R 7»2 Luz 7»14 $readini(armaduras.ini,Luz,Dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.Aço: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armaduras de Aço:14 São Armaduras mais resistentes do que as de Bronze 2)
+    /msg =$nick 2(14 Alêm de aumentar o poder do cavaleiro. 2)
+    /msg =$nick 2( 2Requer:14 Level2 10 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 5.000 14ao seu dono e uma Resistência de2 345 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 10.000 14ao seu dono e uma Resistência de2 550 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(2 L 7»2 Raposa 7»14 $readini(armaduras.ini,Raposa,Dono) 2)
+    /msg =$nick 2(2 S 7»2 Falcão 7»14 $readini(armaduras.ini,Falcão,Dono) 2)
+    /msg =$nick 2(2 N 7»2 Golfinho 7»14 $readini(armaduras.ini,Golfinho,Dono) 2)
+    /msg =$nick 2(2 R 7»2 Saturno 7»14 $readini(armaduras.ini,Saturno,Dono) 2)
+    /msg =$nick 2(2 C 7»2 Lua 7»14 $readini(armaduras.ini,Lua,Dono) 2)
+    /msg =$nick 2(2 O 7»2 Sol 7»14 $readini(armaduras.ini,Sol,Dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.prata: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armaduras de Prata:14 São Armaduras 2MUITO superiores a de Bronze2,14 e são realmente raras2. )
+    /msg =$nick 2( 2Requer:14 Level2 20 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 12.000 14ao seu dono e uma Resistência de2 600 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 20.000 14ao seu dono e uma Resistência de2 850 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(2 R 7»2 Cobra 7»14 $readini(armaduras.ini,Cobra,dono) 2)
+    /msg =$nick 2(2 O 7»2 Babel 7»14 $readini(armaduras.ini,Babel,dono) 2)
+    /msg =$nick 2(2 K 7»2 Hércules 7»14 $readini(armaduras.ini,Hércules,dono) 2)
+    /msg =$nick 2(2 S 7»2 Lagarto 7»14 $readini(armaduras.ini,Lagarto,dono) 2)
+    /msg =$nick 2(2 K 7»2 Perseu 7»14 $readini(armaduras.ini,Perseu,dono) 2)
+    /msg =$nick 2(2 C 7»2 Bússula 7»14 $readini(armaduras.ini,Bússula,dono) 2)
+    /msg =$nick 2(2 L 7»2 Corvo 7»14 $readini(armaduras.ini,Corvo,dono) 2)
+    /msg =$nick 2(2 K 7»2 Pavão 7»14 $readini(armaduras.ini,Pavão,dono) 2)
+    /msg =$nick 2(2 C 7»2 Lótus 7»14 $readini(armaduras.ini,Lótus,dono) 2)
+    /msg =$nick 2(2 N 7»2 Cristal 7»14 $readini(armaduras.ini,Cristal,dono) 2)
+    /msg =$nick 2(2 C 7»2 Lira 7»14 $readini(armaduras.ini,Lira,dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.Ouro: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armaduras de Ouro:14 São as Armaduras mais 2Sagradas14 e respeitadas de que se tem notícia2. ) 
+    /msg =$nick 2(14 É o rank máximo da hierarquia dos cavaleiros tendo muito respeito entre eles2. 2)
+    /msg =$nick 2( 2Requer:14 Level2 40 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 25.000 14ao seu dono e uma Resistência de2 900 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 40.000 14ao seu dono e uma Resistência de2 1.200 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Áries 7»14 $readini(armaduras.ini,Áries,dono) 2)
+    /msg =$nick 2(2 K 7»2 Touro 7»14 $readini(armaduras.ini,Touro,dono) 2)
+    /msg =$nick 2(2 C 7»2 Gêmeos 7»14 $readini(armaduras.ini,Gêmeos,dono) 2)
+    /msg =$nick 2(2 O 7»2 Câncer 7»14 $readini(armaduras.ini,Câncer,dono) 2)
+    /msg =$nick 2(2 R 7»2 Leão 7»14 $readini(armaduras.ini,Leão,dono) 2)
+    /msg =$nick 2(2 C 7»2 Virgem 7»14 $readini(armaduras.ini,Virgem,dono) 2)
+    /msg =$nick 2(2 K 7»2 Libra 7»14 $readini(armaduras.ini,Libra,dono) 2)
+    /msg =$nick 2(2 C 7»2 Escorpião 7»14 $readini(armaduras.ini,Escorpião,dono) 2)
+    /msg =$nick 2(2 S 7»2 Sagitário 7»14 $readini(armaduras.ini,Sagitário,dono) 2)
+    /msg =$nick 2(2 R 7»2 Capricórnio 7»14 $readini(armaduras.ini,Capricórnio,dono) 2)
+    /msg =$nick 2(2 N 7»2 Aquário 7»14 $readini(armaduras.ini,Aquário,dono) 2)
+    /msg =$nick 2(2 L 7»2 Peixes 7»14 $readini(armaduras.ini,Peixes,dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.Sapúris: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armaduras Sapúris:14 São armaduras criadas com o material 2Raro,14 Sapúris, do Inferno2. 2) 
+    /msg =$nick 2( Hades14 manda seus cavaleiros Sapúris para destruir seus inimigos 2)
+    /msg =$nick 2( 2Requer:14 Level2 40 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 25.000 14ao seu dono e uma Resistência de2 900 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 40.000 14ao seu dono e uma Resistência de2 1.200 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Áries 7»14 $readini(armaduras.ini,Áries,dono) 2)
+    /msg =$nick 2(2 K 7»2 Touro 7»14 $readini(armaduras.ini,Touro,dono) 2)
+    /msg =$nick 2(2 C 7»2 Gêmeos 7»14 $readini(armaduras.ini,Gêmeos,dono) 2)
+    /msg =$nick 2(2 O 7»2 Câncer 7»14 $readini(armaduras.ini,Câncer,dono) 2)
+    /msg =$nick 2(2 R 7»2 Leão 7»14 $readini(armaduras.ini,Leão,dono) 2)
+    /msg =$nick 2(2 C 7»2 Virgem 7»14 $readini(armaduras.ini,Virgem,dono) 2)
+    /msg =$nick 2(2 K 7»2 Libra 7»14 $readini(armaduras.ini,Libra,dono) 2)
+    /msg =$nick 2(2 C 7»2 Escorpião 7»14 $readini(armaduras.ini,Escorpião,dono) 2)
+    /msg =$nick 2(2 S 7»2 Sagitário 7»14 $readini(armaduras.ini,Sagitário,dono) 2)
+    /msg =$nick 2(2 R 7»2 Capricórnio 7»14 $readini(armaduras.ini,Capricórnio,dono) 2)
+    /msg =$nick 2(2 N 7»2 Aquário 7»14 $readini(armaduras.ini,Aquário,dono) 2)
+    /msg =$nick 2(2 L 7»2 Peixes 7»14 $readini(armaduras.ini,Peixes,dono) 2)
+    /msg =$nick 2(2 K 7»2 Wyvern 7»14 $readini(armaduras.ini,Wyvern,dono) 2)
+    /msg =$nick 2(2 K 7»2 Garuda 7»14 $readini(armaduras.ini,Garuda,dono) 2)
+    /msg =$nick 2(2 S 7»2 Griffon 7»14 $readini(armaduras.ini,Griffon,dono) 2)
+    /msg =$nick 2(2 K 7»2 hanatos 7»14 $readini(armaduras.ini,Thanatos,dono) 2)
+    /msg =$nick 2(2 C 7»2 Hypnos 7»14 $readini(armaduras.ini,Hypnos,dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.kamei: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armaduras Kamei:14 São as armaduras 2Sagradas14 de Bronze alcançando seu potêncial máximo 2)
+    /msg =$nick 2( Superando14 as armaduras de ouro2. )
+    /msg =$nick 2( 2Requer:14 Level2 60 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 35.000 14ao seu dono e uma Resistência de2 1.200 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 50.000 14ao seu dono e uma Resistência de2 1.500 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Pegasus.Kamei 7»14 $readini(armaduras.ini,Pegasus.Kamei,Dono) 2)
+    /msg =$nick 2(2 N 7»2 Dragão.Kamei 7»14 $readini(armaduras.ini,Dragão.Kamei,Dono) 2)
+    /msg =$nick 2(2 C 7»2 Andrômeda.Kamei 7»14 $readini(armaduras.ini,Andrômeda.Kamei,Dono) 2)
+    /msg =$nick 2(2 N 7»2 Cisne.Kamei 7»14 $readini(armaduras.ini,Cisne.Kamei,Dono) 2)
+    /msg =$nick 2(2 O 7»2 Fênix.Kamei 7»14 $readini(armaduras.ini,Fênix.Kamei,Dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.Deuses: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2( Armadura dos Deuses:14 Estas são as armaduras 2SUPREMAS14 dos cavaleiros 2)
+    /msg =$nick 2(14 As armaduras dos deuses que comandam os cavaleiros normais2.14 Todo cavaleiro segue um 2Deus. ) 
+    /msg =$nick 2( 2Requer:14 Level2 100 )
+    /msg =$nick 2( Tipo B 7»14 Oferecem um Cosmo de2 60.000 14ao seu dono e uma Resistência de2 1.800 14de Life2. 2)
+    /msg =$nick 2( Tipo A 7»14 Oferecem um Cosmo de2 80.000 14ao seu dono e uma Resistência de2 2.000 14de Life2. 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(4 Sintaxe2: 2Constelação 7» 2Armadura 7» 2Dono )
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 C 7»2 Athena 7»14 $readini(armaduras.ini,Athena,Dono) 2)
+    /msg =$nick 2(2 O 7»2 Hades 7»14 $readini(armaduras.ini,Hades,Dono) 2)
+    /msg =$nick 2(2 R 7»2 Zeus 7»14 $readini(armaduras.ini,Zeus,Dono) 2)
+    /msg =$nick 2(2 N 7»2 Poseidon 7»14 $readini(armaduras.ini,Poseidon,Dono) 2)
+    /msg =$nick 2(2 S 7»2 Hera 7»14 $readini(armaduras.ini,Hera,Dono) 2)
+    /msg =$nick 2(2 L 7»2 Odin 7»14 $readini(armaduras.ini,Odin,Dono) 2)
+    /msg =$nick 2(2 O 7»2 Rá 7»14 $readini(armaduras.ini,Rá,Dono) 2)
+    /msg =$nick 2(2 K 7»2 Hermes 7»14 $readini(armaduras.ini,Hermes,Dono) 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 14,2(0 Constelações: 14)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2(2 R 7»2 Rhazen 2)
+    /msg =$nick 2(2 N 7»2 Njord 2)
+    /msg =$nick 2(2 C 7»2 Condef 2) 
+    /msg =$nick 2(2 O 7»2 Osíris 2)
+    /msg =$nick 2(2 S 7»2 Sylph 2)
+    /msg =$nick 2(2 L 7»2 Loufh 2)
+    /msg =$nick 2(2 K 7»2 Kyrah 2)
+    /msg =$nick 0,0CdzForever AutoLuta 
+    /msg =$nick 2( 14Sua Constelação é2: $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) 2)
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para ver os Dados de uma Armadura2,14 Digite2: .14InfoArm 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo A,14 Digite2: 2.14TipoA 2<14armadura2> )
+    /msg =$nick 2(14 Para pegar uma Armadura 2Tipo B,14 Digite2: 2.14TipoB 2<14armadura2> )
+    /msg =$nick 0,0CdzForever AutoLuta
+  }
+}
+
+on *:chat:.InfoArm*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2( 4ERRO:14 Coloque o nome da Armadura 2) | halt }
+    if ( $readini(armaduras.ini,$2,Dono) == $null ) {
+    /msg =$nick 2( 4ERRO:14 A armadura2 $2 14não existe 2) | halt }
+    /msg =$nick 2(14 Dados da armadura2 $2 14Tipo 2A: )
+    /msg =$nick 2( Dono:14 $readini(armaduras.ini,$2,Dono) 2)
+    /msg =$nick 2( Tipo:14 $readini(armaduras.ini,$2,Tipo) 2)
+    /msg =$nick 2( Constelação:14 $readini(armaduras.ini,$2,constelaçao) 2)
+    /msg =$nick 2( Técnicas(14Nivel2):14 $readini(armaduras.ini,$2,Golpes) 2)
+    /msg =$nick 2( Técnica Inicial:14 $readini(armaduras.ini,$2,inicial) 2)
+    /msg =$nick 2( Acréscimo de Cosmo:14 $readini(armaduras.ini,$2,Cosmo) 2)
+    /msg =$nick 2( Acréscimo de Hp:14 $readini(armaduras.ini,$2,life) 2)
+    /msg =$nick 2( Nivel Necesario:14 $readini(armaduras.ini,$2,nivel) 2)
+  }
+}
+
+on *:chat:.TipoA*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,destravada) == $Null ) {
+    /msg =$nick 2(4 ERRO:14 Você não tem 2acesso14 a esta armadura 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,destravada) != $2 ) {
+    /msg =$nick 2(4 ERRO:14 Você não tem 2acesso14 a esta armadura 2) | halt }
+    if !$2 { /msg =$nick 2( 4ERRO:14 Coloque o nome da Armadura 2) | halt }
+    if ( $readini(armaduras.ini,$2,Dono) == $Null ) {
+    /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14não existe 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,armadura) != nenhuma ) {
+    /msg =$nick 2( 4ERRO:14 Você Já possui uma armadura 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nivel) < $readini(armaduras.ini,$2,nivel) ) {
+      /msg =$nick 2( 4ERRO:14 Você só pode pegar a Armadura2 $2 14no Nivel2 $readini(armaduras.ini,$2,nivel)  2)
+    /msg =$nick 2(14 Para mais informações2,14 Digite2: .14InfoArm2 $2 2) | halt }
+    if ( $readini(armaduras.ini,$2,dono) != Disponível ) { 
+      /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14pertence a2 $readini(armaduras.ini,$2,dono) 2)
+    /msg =$nick 2(14 Para mais informações2,14 Digite2: .14Arm2 $2 2) | halt }
+    if ( $readini(armaduras.ini,$2,constelaçao) != $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) ) {
+    /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14é da constelação2 $readini(armaduras.ini,$2,constelaçao) 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dataArm) == $date ) {
+    /msg =$nick 2(4 ERRO:14 Você tem que esperar2 24h 14para poder Trocar de Armadura 2) | halt }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+    /msg =$nick 2(4 ERRO:14 Você está 2Lutando ) | halt }
+    /writeini cadastros\ $+ $nick $+ .ini $nick TpArm TipoA
+    /writeini cadastros\ $+ $nick $+ .ini $nick DataArm $date
+    /writeini cadastros\ $+ $nick $+ .ini $nick horaArm $time
+    /writeini cadastros\ $+ $nick $+ .ini $nick Armadura $2
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hp $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) + $readini(armaduras.ini,$2,life) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hpmax $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) + $readini(armaduras.ini,$2,life) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Tipo $readini(armaduras.ini,$2,tipo)
+    /writeini cadastros\ $+ $nick $+ .ini $nick Cosmo $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,cosmo) + $readini(armaduras.ini,$2,cosmo) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hparm 100
+    /writeini cadastros\ $+ $nick $+ .ini $nick hpmaxarm 100
+    /writeini cadastros\ $+ $nick $+ .ini $nick Tecnicas $readini(armaduras.ini,$2,inicial)
+    if ( $readini(armaduras.ini,$2,Tipo) == Prata ) {
+    /writeini Golpes\ $+ $nick $+ .ini $nick $readini(armaduras.ini,$2,inicial) 70 }
+    if ( $readini(armaduras.ini,$2,Tipo) == Ouro/Sapúris ) {
+    /writeini Golpes\ $+ $nick $+ .ini $nick $readini(armaduras.ini,$2,inicial) 80 }
+    if ( $readini(armaduras.ini,$2,Tipo) == Kamei ) {
+    /writeini Golpes\ $+ $nick $+ .ini $nick $readini(armaduras.ini,$2,inicial) 100 }
+    if ( $readini(armaduras.ini,$2,Tipo) == Deuses ) {
+    /writeini Golpes\ $+ $nick $+ .ini $nick $readini(armaduras.ini,$2,inicial) 120 }
+    /writeini armaduras.ini $2 Dono $nick 
+    /msg =$nick 2(14 Você pegou a Armadura2: $2 2)
+    /msg =$nick 2( Cosmo:14 $readini(cadastros\ $+ $nick $+ .ini,$nick,cosmo) 2)
+    /msg =$nick 2( Hp:14 $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) 2)
+  }
+}
+
+
+on *:chat:.TipoB*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2( 4ERRO:14 Coloque o nome da Armadura 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nivel) < $readini(armadurasb.ini,$2,nivel) ) {
+    /msg =$nick 2( 4ERRO:14 Você só pode pegar a Armadura2 $2 14no Nivel2 $readini(armadurasb.ini,$2,nivel) 2) | halt }
+    if ( $readini(armadurasB.ini,$2,constelaçao) != $readini(cadastros\ $+ $nick $+ .ini,$nick,constelação) ) {
+    /msg =$nick 2(4 ERRO:14 a Armadura2 $2 14é da constelação2 $readini(armadurasB.ini,$2,constelaçao) 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dataArm) == $date ) {
+    /msg =$nick 2(4 ERRO:14 Você tem que esperar2 24h 14para poder Trocar de Armadura 2) | halt }
+    if ( $readini(Cadastros\ $+ $nick $+ .ini,$nick,armadura) != Nenhuma ) {
+    /msg =$nick 2(4 ERRO:14 Você já possui uma armadura2,14 Digite 2.14Trocar para saber como trocar de armadura 2) | halt }
+    /writeini cadastros\ $+ $nick $+ .ini $nick TpArm TipoB
+    /writeini cadastros\ $+ $nick $+ .ini $nick DataArm $date
+    /writeini cadastros\ $+ $nick $+ .ini $nick horaArm $time
+    /writeini cadastros\ $+ $nick $+ .ini $nick Armadura $2
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hp $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) + $readini(armadurasb.ini,$2,life) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hpmax $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax) + $readini(armadurasb.ini,$2,life) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Tipo $readini(armadurasb.ini,$2,tipo)
+    /writeini cadastros\ $+ $nick $+ .ini $nick Cosmo $calc( $readini(cadastros\ $+ $nick $+ .ini,$nick,cosmo) + $readini(armadurasb.ini,$2,cosmo) )
+    /writeini cadastros\ $+ $nick $+ .ini $nick Tecnicas $readini(armadurasb.ini,$2,golpes)
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hparm 100
+    /writeini cadastros\ $+ $nick $+ .ini $nick Hpmaxarm 100
+    /set %golpe1 $readini(Golpesarm.ini,$2,golpe1)
+    /set %golpe2 $readini(Golpesarm.ini,$2,golpe2)
+    /set %golpe3 $readini(Golpesarm.ini,$2,golpe3)
+    /set %golpe4 $readini(Golpesarm.ini,$2,golpe4)
+    /msg =$nick 2(14 Você pegou a Armadura2: $2 2)
+    /msg =$nick 2( Cosmo:14 $readini(cadastros\ $+ $nick $+ .ini,$nick,cosmo) 2)
+    /msg =$nick 2( Hp:14 $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) 2)
+    /writeini golpes\ $+ $nick $+ .ini $nick %golpe1 $readini(danogolpe.ini,golpes,%golpe1) 
+    /writeini golpes\ $+ $nick $+ .ini $nick %golpe2 $readini(danogolpe.ini,golpes,%golpe2) 
+    /writeini golpes\ $+ $nick $+ .ini $nick %golpe3 $readini(danogolpe.ini,golpes,%golpe3) 
+    /writeini golpes\ $+ $nick $+ .ini $nick %golpe4 $readini(danogolpe.ini,golpes,%golpe4) 
+  }
+}
+
+on *:chat:.Trocar: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    /msg =$nick 2(14 Para trocar Sua Armadura2: )
+    /msg =$nick 2(14 Digite2: .14Pedir 2<14nick2> 2)
+    /msg =$nick 2(4 Atenção: 2<14nick2>14 Deve ser Algum Operador do canal 2#14CdzForever 2)
+    /msg =$nick 2(4 Exemplo:2 .14Pedir UnL0ad_ 2) 
+  }
+}
+
+on *:chat:.Pedir*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(4 ERRO:14 Coloque o Nick de Alguem Operador 2) | halt }
+    if ( $readini(admins.ini,$2,admin) != Sim ) {
+    /msg =$nick 2(4 ERRO:2 $2 14não pode Tirar sua Armadura 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,armadura) == Nenhuma ) {
+    /msg =$nick 2(4 ERRO:14 Você não possui uma Armadura 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,dataArm) == $date ) {
+    /msg =$nick 2(4 ERRO:14 Você tem que esperar2 24h 14para poder Trocar de Armadura 2) | halt }
+    /msg $2 2( $nick 14Quer Trocar de Armadura Para tirar2,14 Digite No Chat do BoT2: .14Tirar2 $nick 2) 
+    /msg =$nick 2(14 Aguarde2, $2 14Tirar sua Armadura 2) 
+  }
+}
+
+on *:chat:.Tirar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    if !$2 { /msg =$nick 2(4 ERRO:14 Coloque o Nick do Usuario 2) | halt }
+    /set %arm $readini(cadastros\ $+ $2 $+ .ini,$2,armadura)
+    /writeini cadastros\ $+ $2 $+ .ini $2 Armadura Nenhuma
+    /writeini cadastros\ $+ $2 $+ .ini $2 Tipo N/A
+    /remini cadastros\ $+ $2 $+ .ini $2 Hparm 
+    /remini cadastros\ $+ $2 $+ .ini $2 hpmaxarm
+    /writeini cadastros\ $+ $2 $+ .ini $2 Tecnicas Nenhuma
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,TpArm) == TipoA ) {
+      /writeini cadastros\ $+ $2 $+ .ini $2 Cosmo $calc( $readini(cadastros\ $+ $2 $+ .ini,$2,cosmo) - $readini(armaduras.ini,%arm,Cosmo) )
+      /writeini cadastros\ $+ $2 $+ .ini $2 Hpmax $calc( $readini(cadastros\ $+ $2 $+ .ini,$2,Hpmax) - $readini(armaduras.ini,%arm,Life) )
+      /writeini cadastros\ $+ $2 $+ .ini $2 Hp $readini(cadastros\ $+ $2 $+ .ini,$2,Hpmax)
+      /writeini armaduras.ini %arm Dono Disponível
+    }
+    if ( $readini(cadastros\ $+ $2 $+ .ini,$2,TpArm) == TipoB ) {
+      /writeini cadastros\ $+ $2 $+ .ini $2 Cosmo $calc( $readini(cadastros\ $+ $2 $+ .ini,$2,cosmo) - $readini(armadurasB.ini,%arm,Cosmo) )
+      /writeini cadastros\ $+ $2 $+ .ini $2 Hpmax $calc( $readini(cadastros\ $+ $2 $+ .ini,$2,Hpmax) - $readini(armadurasB.ini,%arm,Life) )
+      /writeini cadastros\ $+ $2 $+ .ini $2 Hp $readini(cadastros\ $+ $2 $+ .ini,$2,Hpmax)
+    }
+    /msg =$nick 2(14 Você Tirou a Armadura de2: $2 2) 
+    /msg $2 2( $nick 14Tirou sua Armadura2,14 você já pode Trocar 2)
+  }
+}
+
+
+on *:chat:.limpar*: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if !$2 { /msg =$nick 2(4 ERRO:14 Coloque o nome da armadura 2) | halt }
+    if ( $readini(admin.ini,$nick,admin) != Sim ) {
+    /msg =$nick 2(14 Você não é um 2Admin14 ou não está identificado 2) | Halt }
+    if ( $readini(armaduras.ini,$2,Dono) == $null ) {
+    /msg =$nick 2(14 A armadura2 $2 14não existe 2) | halt }
+    /writeini armaduras.ini $2 Dono Disponível
+    /msg =$nick 2(14 Você colocou a Armadura2 $2 14Disponível 2)
+  }
+}

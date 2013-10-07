@@ -1,0 +1,226 @@
+on *:CHAT:.Treinar: {
+  if ($nick !ison #Cdzforever) { //close -c $nick | halt ) }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,Treino) == $date ) {
+    /msg =$nick 2(4 ERRO:14 Você Já Treinou Hoje 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) != nenhum) && ( $readini(cadastros\ $+ $nick $+ .ini,$nick,Treino) != $date ) {
+      /msg =$nick 2(14 Escolha o Tipo de Treinamento2: )
+      /msg =$nick 2( .Treino Bronze 7»14 Treino Fácil 2)
+      /msg =$nick 2( .Treino Negro 7»14 Treino Médio 2)
+    /msg =$nick 2( .Treino Ouro 7»14 Treino Dificil 2) | halt }
+    if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) == nenhum) {
+      /msg =$nick 2(14 Escolha o Tipo de Treinamento2: )
+      /msg =$nick 2( .Treino Bronze 7»14 Treino Fácil 2)
+      /msg =$nick 2( .Treino Negro 7»14 Treino Médio 2)
+    /msg =$nick 2( .Treino Ouro 7»14 Treino Dificil 2) | halt }
+  }
+}
+
+on *:chat:.Treino Bronze: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+      /msg =$nick 2(4 ERRO:14 Você Está sendo Desafiado 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+      /msg =$nick 2(4 ERRO:14 Você Já está lutando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == trabalhando ) {
+      /msg =$nick 2(4 ERRO:14 Você Está Trabalhando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+      /msg =$nick 2(4 ERRO:14 Você Já Está Treinando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) < 1 ) {
+        /msg =$nick 2(4 ERRO:14 Você não tem Hp Suficiente 2)
+        .halt
+      }
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) > 0 ) {
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) == $date ) {
+          /msg =$nick 2(4 ERRO:14 Você Já Treinou Hoje 2)
+          .halt
+        }
+        if ( $readini(listando.ini,$nick,listando) == Listando ) { /remini listando.ini $nick }
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) != $date ) {
+          /writeini cadastros\ $+ $nick $+ .ini $nick treino $date
+          /writeini cadastros\ $+ $nick $+ .ini $nick treinoh $time
+          /set %oponente $read guerreiros.ini
+          /writeini autoluta\ $+ $nick $+ .ini $nick oponente %oponente
+          /writeini autoluta\ $+ $nick $+ .ini $nick lutando treinando
+          /writeini autoluta\ $+ $nick $+ .ini $nick ataque $readini(cadastros\ $+ $nick $+ .ini,$nick,ataque)
+          /writeini autoluta\ $+ $nick $+ .ini $nick Defesa $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hp $readini(cadastros\ $+ $nick $+ .ini,$nick,hp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mp $readini(cadastros\ $+ $nick $+ .ini,$nick,mp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente nick %oponente
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $readini(golpetreinom.ini,%oponente,hp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hpmax $readini(golpetreinom.ini,%oponente,hpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mp $readini(golpetreinom.ini,%oponente,mp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mpmax $readini(golpetreinom.ini,%oponente,mpmax)
+          /msg =$nick 2(14 Batalha entre2: $nick 14Vs2 %oponente )
+          /msg =$nick 2(14 Começe Atacando2,14 Digite2: .14Golpe 2<14golpe2> )
+          /msg =$nick 2(14 Seus Golpes são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,Golpes) )
+          /msg =$nick 2(14 Suas Técnicas são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,tecnicas) ) 
+        }
+      }
+    }
+  }
+}
+
+
+on *:chat:.Treino Negro: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+      /msg =$nick 2(4 ERRO:14 Você Está sendo Desafiado 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+      /msg =$nick 2(4 ERRO:14 Você Já está lutando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == trabalhando ) {
+      /msg =$nick 2(4 ERRO:14 Você Está Trabalhando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+      /msg =$nick 2(4 ERRO:14 Você Já Está Treinando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) < 1 ) {
+        /msg =$nick 2(4 ERRO:14 Você não tem Hp Suficiente 2)
+        .halt
+      }
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) > 0 ) {
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) == $date ) {
+          /msg =$nick 2(4 ERRO:14 Você Já Treinou Hoje 2)
+          .halt
+        }
+        if ( $readini(listando.ini,$nick,listando) == Listando ) { /remini listando.ini $nick }
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) != $date ) {
+          /writeini cadastros\ $+ $nick $+ .ini $nick treino $date
+          /writeini cadastros\ $+ $nick $+ .ini $nick treinoh $time
+          /set %oponente $read guerreiros2.ini
+          /writeini autoluta\ $+ $nick $+ .ini $nick oponente %oponente
+          /writeini autoluta\ $+ $nick $+ .ini $nick lutando treinando
+          /writeini autoluta\ $+ $nick $+ .ini $nick ataque $readini(cadastros\ $+ $nick $+ .ini,$nick,ataque)
+          /writeini autoluta\ $+ $nick $+ .ini $nick Defesa $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hp $readini(cadastros\ $+ $nick $+ .ini,$nick,hp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mp $readini(cadastros\ $+ $nick $+ .ini,$nick,mp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente nick %oponente
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $readini(golpetreinom.ini,%oponente,hp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hpmax $readini(golpetreinom.ini,%oponente,hpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mp $readini(golpetreinom.ini,%oponente,mp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mpmax $readini(golpetreinom.ini,%oponente,mpmax)
+          /msg =$nick 2(14 Batalha entre2: $nick 14Vs2 %oponente )
+          /msg =$nick 2(14 Começe Atacando2,14 Digite2: .14Golpe 2<14golpe2> )
+          /msg =$nick 2(14 Seus Golpes são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,Golpes) )
+          /msg =$nick 2(14 Suas Técnicas são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,tecnicas) 
+        }
+      }
+    }
+  }
+}
+
+on *:chat:.Treino Ouro: {
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,nick) == $null ) {
+  /msg =$nick 2(4 ERRO:14 Você não está Cadastrado 2) | halt }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 0 ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == $null ) {
+    /msg =$nick 2(14 Você não esta Identificado2,14 Digite2: .14Login 2<14senha2> )
+    .halt
+  }
+  if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,id) == 1 ) {
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == desafiado ) {
+      /msg =$nick 2(4 ERRO:14 Você Está sendo Desafiado 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == sim ) {
+      /msg =$nick 2(4 ERRO:14 Você Já está lutando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == trabalhando ) {
+      /msg =$nick 2(4 ERRO:14 Você Está Trabalhando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == treinando ) {
+      /msg =$nick 2(4 ERRO:14 Você Já Está Treinando 2)
+      .halt
+    }
+    if ( $readini(autoluta\ $+ $nick $+ .ini,$nick,lutando) == nao ) {
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) < 1 ) {
+        /msg =$nick 2(4 ERRO:14 Você não tem Hp Suficiente 2)
+        .halt
+      }
+      if (  $readini(cadastros\ $+ $nick $+ .ini,$nick,hp) > 0 ) {
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) == $date ) {
+          /msg =$nick 2(4 ERRO:14 Você Já Treinou Hoje 2)
+          .halt
+        }
+        if ( $readini(listando.ini,$nick,listando) == Listando ) { /remini listando.ini $nick }
+        if ( $readini(cadastros\ $+ $nick $+ .ini,$nick,treino) != $date ) {
+          /writeini cadastros\ $+ $nick $+ .ini $nick treino $date
+          /writeini cadastros\ $+ $nick $+ .ini $nick treinoh $time
+          /set %oponente $read guerreiros3.ini
+          /writeini autoluta\ $+ $nick $+ .ini $nick oponente %oponente
+          /writeini autoluta\ $+ $nick $+ .ini $nick lutando treinando
+          /writeini autoluta\ $+ $nick $+ .ini $nick ataque $readini(cadastros\ $+ $nick $+ .ini,$nick,ataque)
+          /writeini autoluta\ $+ $nick $+ .ini $nick Defesa $readini(cadastros\ $+ $nick $+ .ini,$nick,defesa)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hp $readini(cadastros\ $+ $nick $+ .ini,$nick,hp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick hpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,hpmax)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mp $readini(cadastros\ $+ $nick $+ .ini,$nick,mp)
+          /writeini autoluta\ $+ $nick $+ .ini $nick mpmax $readini(cadastros\ $+ $nick $+ .ini,$nick,mpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente nick %oponente
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hp $readini(golpetreinom.ini,%oponente,hp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente hpmax $readini(golpetreinom.ini,%oponente,hpmax)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mp $readini(golpetreinom.ini,%oponente,mp)
+          /writeini autoluta\ $+ %oponente $+ .ini %oponente mpmax $readini(golpetreinom.ini,%oponente,mpmax)
+          /msg =$nick 2(14 Batalha entre2: $nick 14Vs2 %oponente )
+          /msg =$nick 2(14 Começe Atacando2,14 Digite2: .14Golpe 2<14golpe2> )
+          /msg =$nick 2(14 Seus Golpes são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,Golpes) )
+          /msg =$nick 2(14 Suas Técnicas são2: $readini(cadastros\ $+ $nick $+ .ini,$nick,tecnicas) 
+        }
+      }
+    }
+  }
+}

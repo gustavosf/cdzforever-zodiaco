@@ -1,0 +1,54 @@
+on *:start:{
+  echo -a 15»14»2»14 CdzForever 2AutoLutas
+  echo -a 15»14»2»14 Sistema Feito por 2UnL0ad_15/2CdzForever
+  echo -a 15»14»2»14 Para 2Total14 funcionamento desde nao altere 2Nenhuma14 linha de sua configuração
+  echo -a 15»14»2»14 Para Instalar o 2Bot14 Digite2: 14/2CdzForever
+  echo -a 15»14»2»14 Para ver os 2Cadastrados2: /14cadastros 2ou14 F1
+  echo -a 15»14»2»14 Para ver as 2Armaduras2: /14armaduras 2ou14 F2
+  echo -a 15»14»2»14 Para ver os 2CLans2: /14Clans 2ou14 F3
+  inc %start
+  .set %timer.inicio $time
+  .set %ctime.entrada $ctime
+}
+on *:unload: {
+  /remini instal.ini ins insd 
+}
+alias CdzForever {
+  /echo -a 15»14»2»14 Instalando BoT... 15(21515)
+  .load -rs CdzForever\2x2.txt
+  .load -rs CdzForever\administrar.txt
+  .load -rs CdzForever\armaduras.txt
+  .load -rs CdzForever\ataqueclanf.txt
+  .load -rs CdzForever\ataquereação.txt
+  .load -rs CdzForever\banco.txt
+  .load -rs CdzForever\CdzForever.txt
+  .load -rs CdzForever\chat.txt
+  .load -rs CdzForever\clan2.txt
+  .load -rs CdzForever\close.txt
+  .load -rs CdzForever\contra.txt
+  .load -rs CdzForever\const..txt
+  .load -rs CdzForever\defesa.txt
+  .load -rs CdzForever\desafio.txt
+  .load -rs CdzForever\descadastrar.txt
+  .load -rs CdzForever\elev.cosmo.txt
+  .load -rs CdzForever\enquete.txt
+  .load -rs CdzForever\esquiva.txt
+  .load -rs CdzForever\fimguerra.txt
+  .load -rs CdzForever\fimtreino.txt
+  .load -rs CdzForever\Guerra.txt
+  .load -rs CdzForever\listar.txt
+  .load -rs CdzForever\loja.txt
+  .load -rs CdzForever\menu.txt
+  .load -rs CdzForever\nao.txt
+  .load -rs CdzForever\sim.txt
+  .load -rs CdzForever\status.txt
+  .load -rs CdzForever\top.txt
+  .load -rs CdzForever\topclan.txt
+  .load -rs CdzForever\trabalho.txt
+  .load -rs CdzForever\treino1.txt
+  .load -rs CdzForever\treino2.txt
+  .load -rs CdzForever\treino3.txt
+  .load -rs CdzForever\vender.txt
+  /writeini instal.ini ins insd 1
+  /echo -a 15»14»2»14 CdzForever2&14AutoLutas Instalado2! 15(215)
+}

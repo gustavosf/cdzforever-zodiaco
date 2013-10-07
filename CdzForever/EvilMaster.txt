@@ -1,0 +1,11 @@
+on *:chat:!Staff: {
+   /msg =$nick Founder :: Hyoga_Di_Cisne
+   /msg =$nick Founder :: _KDETT_
+   /msg =$nick Founder :: Virtua
+   /msg =$nick Founder :: Melord
+   /msg =$nick Gerência :: Benji 
+   /msg =$nick Gerência :: Quailman 
+   /msg =$nick SubGerência :: EvilMaster
+   /msg =$nick Script :: UnL0ad_
+   /msg =$nick Design :: EvilMaster
+} 

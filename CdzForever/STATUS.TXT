@@ -1,0 +1,53 @@
+alias f1 cadastros
+alias cadastros {
+  clear @Forever
+  window @Forever verdana 12
+  echo @Forever $str($chr(160),50) $+ CdzForever AutoLutas
+  echo @Forever $str($chr(160),40) $+ Você nunca viu nada igual
+  echo @Forever $str($chr(160),45) $+ 14Feito por2: UnL0ad_
+  echo @Forever $chr(160)
+  echo @Forever 2S14tatus2:
+  echo @Forever 15.2N14ick2: $me
+  echo @Forever 15.2B14OT iniciado às2: %timer.inicio
+  echo @Forever 15.2D14ata2: $date
+  if %start == 1 { echo @forever 15.2B14OT ultizado2: %start Vez }
+  if %start > 1 { echo @forever 15.2B14OT ultizado2: %start Vezes }
+  echo @Forever 15.2U14ltima vez Utilizado à2: $replace($duration($calc(%ctime.entrada - %ctime.saida)),wk,$chr(32) $+ dia,hr,$chr(32) $+ hora,min,$chr(32) $+ minuto,sec,$chr(32) $+ segundo)
+  if $server != $null { echo @forever 15.2S14ervidor2: $server }
+  echo @Forever $chr(160)
+  echo @Forever 2I14nfo Cadastros2:
+  /set %clans $ini(cadastros.ini,0)
+  /set %cac 1
+   while ( %clans >= %cac ) {
+  echo @Forever 2(14 %cac 2- $ini(cadastros.ini,%cac) 7»2 Level2:14 $readini(cadastros\ $+ $ini(cadastros.ini,%cac) $+ .ini,$ini(cadastros.ini,%cac),nivel) 2)
+    inc %cac
+  }
+}
+
+alias f2 armaduras
+alias armaduras {
+  clear @Forever
+  window @Forever verdana 12
+  echo @Forever $chr(160)
+  echo @Forever 15.2A14rmaduras2:
+  /set %arm $ini(armaduras.ini,0)
+  /set %kak 1
+   while ( %arm >= %kak ) {
+  echo @Forever 2(14 %kak 2- $ini(armaduras.ini,%kak) $chr(160) 7»2 Dono2:14 $readini(armaduras.ini,$ini(armaduras.ini,%kak),dono) 2)
+    inc %kak
+  }
+}
+
+alias f3 clans
+alias clans {
+  clear @Forever
+  window @Forever verdana 12
+  echo @Forever $chr(160)
+  echo @Forever 15.2C14lans2:
+  /set %clan $ini(Clans.ini,0)
+  /set %lal 1
+   while ( %clan >= %lal ) {
+  echo @Forever 2(14 %lal 2- $ini(clans.ini,%lal) $chr(160) 7»2 Poder2:14 $readini(clans\ $+ $ini(clans.ini,%lal) $+ .ini,$ini(clans.ini,%lal),poder) 2)
+    inc %lal
+  }
+}
